@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.1",
+        "debril/rss-atom-bundle": "^4.2",
         "guzzlehttp/guzzle": "^6.3",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",
@@ -60,7 +61,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": "true",
             "require": "4.2.*"
         }
     }
