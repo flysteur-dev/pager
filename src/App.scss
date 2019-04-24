@@ -1,0 +1,146 @@
+$bg:   #f3f3f3;
+$text_primary: #1f1f2e;
+$text_secondary: #697789;
+$red:  #c2300c;
+
+html, body, #root {
+	margin:0;
+	padding:0;
+	height:100%;
+}
+
+.App {
+	display:flex;
+	height:100%;
+	background-color: $bg;
+	color:$text_secondary;
+	font-size: 14px;
+
+	.App-Feeds {
+		display:flex;
+		flex-grow: 1;
+		flex-direction: column;
+		overflow: auto;
+		border-right:1px solid white;
+
+		h1 {
+			font-style: italic;
+			text-align:center;
+			color:$text_primary;
+		}
+
+		.add {
+			height:40px;
+			font-weight: bold;
+		}
+
+		ul {
+			margin:0;
+			padding:0;
+
+			li {
+				display:flex;
+				align-items: center;
+
+				height:40px;
+				padding:10px;
+				list-style-type: none;
+				border-bottom:1px solid $bg;
+				box-sizing: border-box;
+
+				&:hover {
+					cursor:pointer;
+					background-color:white;
+				}
+
+				div {
+
+					&.n { // unread
+						width:20px;
+						background-color:$red;
+						border-radius: 10px;
+						text-align: center;
+						color:white;
+						font-weight: bold;
+						font-size:12px;
+					}
+					&.i { // icon
+						flex-grow: 1;
+						text-align: center;
+
+						img {
+							width:16px;
+							height:16px;
+						}
+					}
+					&.t { // feed title
+						flex-grow: 4;
+					}
+				}
+			}
+		}
+
+		.add {
+			border:0;
+			background-color: $red;
+			color:white;
+			cursor:pointer;
+		}
+	}
+
+	.App-News {
+		flex-grow: 2;
+		overflow: auto;
+		background-color:white;
+
+		ul {
+			margin:0;
+			padding:0;
+
+			li {
+				display:flex;
+				align-items: center;
+
+				height:40px;
+				list-style-type: none;
+				border-bottom:1px solid $bg;
+				color:$text_primary;
+
+				&:hover {
+					cursor:pointer;
+					background-color: $bg;
+				}
+
+				div {
+					flex-grow: 1;
+					text-align: center;
+
+					&.i { //icon
+						img {
+							height:16px;
+							width:16px;
+						}
+					}
+
+					&.t { } //title
+
+					&.d { //description
+						flex-grow:2;
+					}
+
+					&.ts { } //time
+
+				}
+			}
+		}
+	}
+
+	.App-Viewer {
+		display:none;
+		flex-grow: 3;
+		overflow: auto;
+		background-color:white;
+		border-left:1px solid $bg;
+	}
+
+}

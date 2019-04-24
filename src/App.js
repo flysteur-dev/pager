@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+
+//Components
+import Feeds from './Components/Feeds';
+import News from './Components/News';
+import Viewer from './Components/Viewer';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			loading:    true,
+			feeds:      [
+				{ icon: "https://korben.info/app/themes/korben/dist/favicons/favicon-32x32.png", title: "Korben", uri: "https://korben.info/rss" },
+			],
+			feedsItems: [
+				{ _id: 1, title: "Blabla", desc: "blabla 2", date: new Date()}
+			]
+		}
+	}
+
+	async componentDidMount() {
+
+	}
+
+	render() {
+		return (
+			<div className="App">
+				<Feeds feeds={this.state.feeds} />
+				<News />
+				<Viewer />
+			</div>
+		);
+	}
 }
 
 export default App;
