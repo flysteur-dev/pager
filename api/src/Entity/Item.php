@@ -48,6 +48,12 @@ class Item
      */
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $feed;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -94,9 +100,9 @@ class Item
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(?string $author): self
     {
-        $this->author = $author;
+        $this->author = $author ?: '';
 
         return $this;
     }
@@ -121,6 +127,18 @@ class Item
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getFeed(): ?Feed
+    {
+        return $this->feed;
+    }
+
+    public function setFeed(?Feed $feed): self
+    {
+        $this->feed = $feed;
 
         return $this;
     }
