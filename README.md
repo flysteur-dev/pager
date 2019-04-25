@@ -1,7 +1,7 @@
-Pager API Platform backend
+Pager API Platform backend + front React
 
-# Run server
+# Run project
  docker-compose up -d
 
 # Navigate
-http://localhost
+http://localhost:8080/app
