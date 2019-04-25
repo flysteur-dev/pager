@@ -14,7 +14,7 @@ html, body, #root {
 	height:100%;
 	background-color: $bg;
 	color:$text_secondary;
-	font-size: 14px;
+	font-size: 13px;
 
 	.App-Feeds {
 		display:flex;
@@ -88,7 +88,7 @@ html, body, #root {
 		}
 	}
 
-	.App-News {
+	.App-List {
 		flex-grow: 2;
 		overflow: auto;
 		background-color:white;
@@ -106,29 +106,37 @@ html, body, #root {
 				border-bottom:1px solid $bg;
 				color:$text_primary;
 
+				&.unread {
+					font-weight: bold;
+				}
+
 				&:hover {
 					cursor:pointer;
 					background-color: $bg;
 				}
 
 				div {
-					flex-grow: 1;
-					text-align: center;
-
 					&.i { //icon
+						width:10%;
+						text-align: center;
+
 						img {
 							height:16px;
 							width:16px;
 						}
 					}
 
-					&.t { } //title
-
-					&.d { //description
-						flex-grow:2;
+					&.ts { //time
+						width:10%;
 					}
 
-					&.ts { } //time
+					&.t { //title
+						width:30%;
+					}
+
+					&.d { //description
+						width: 50%;
+					}
 
 				}
 			}
@@ -136,7 +144,7 @@ html, body, #root {
 	}
 
 	.App-Viewer {
-		display:none;
+		//display:none;
 		flex-grow: 3;
 		overflow: auto;
 		background-color:white;
