@@ -24,9 +24,9 @@ class App extends Component {
 
 	async componentDidMount() {
 		//Initialize persisted items
-		//TODO: Should only render unread documents
 		let persistedItems = await this.context.db.allDocs({ include_docs: true });
-			persistedItems = persistedItems.rows.map((item) => item.doc);
+			persistedItems = persistedItems.rows.filter((item) => item.doc.unread === true);
+			persistedItems = persistedItems.map(item => item.doc);
 
 		this.setState({ loading: false, feedsItems: [...persistedItems] });
 	}
