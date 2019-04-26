@@ -26,15 +26,15 @@ class Feed extends Component {
 
 			feed.items.forEach(async item => {
 				try {
-
 					//Try to add document
 					//If document already exist fail with conflict
 					await this.context.db.put({
 						_id:    item.guid,
 						icon:   this.state.icon,
 						title:  item.title,
-						desc:   item.content,
+						desc:   item.contentSnippet,
 						date:   item.isoDate,
+						link:   item.link,
 						unread: true
 					});
 				} catch(e) {

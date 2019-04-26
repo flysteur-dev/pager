@@ -15,8 +15,8 @@ class App extends Component {
 		this.state = {
 			loading:    true,
 			feeds:      [
-				{ icon: "https://korben.info/app/themes/korben/dist/favicons/favicon-32x32.png", title: "Korben", uri: "https://korben.info/rss" },
-				{ icon: "https://www.nextinpact.com/Images/favicon.ico", title: "Next INpact", uri: "https://www.nextinpact.com/rss/news.xml" },
+				{ title: "Korben",      icon: "https://korben.info/app/themes/korben/dist/favicons/favicon-32x32.png", uri: "https://korben.info/rss" },
+				{ title: "Next INpact", icon: "https://www.nextinpact.com/Images/favicon.ico", uri: "https://www.nextinpact.com/rss/news.xml" },
 			],
 			feedsItems: [ ]
 		}

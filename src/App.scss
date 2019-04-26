@@ -24,6 +24,7 @@ html, body, #root {
 		overflow: auto;
 		border-right:1px solid white;
 		min-width:250px;
+		max-width:250px;
 
 		h1 {
 			font-style: italic;
@@ -104,6 +105,7 @@ html, body, #root {
 			margin:0;
 			padding:0;
 
+			a  { text-decoration: none; }
 			li {
 				display:flex;
 				align-items: center;
@@ -153,7 +155,7 @@ html, body, #root {
 	}
 
 	.App-Viewer {
-		//display:none;
+		display:none;
 		flex-grow: 3;
 		overflow: auto;
 		background-color:white;
