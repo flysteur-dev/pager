@@ -14,21 +14,32 @@ class App extends Component {
 
 		this.state = {
 			loading:    true,
-			feeds:      [
-				{ title: "Korben",      icon: "https://korben.info/app/themes/korben/dist/favicons/favicon-32x32.png", uri: "https://korben.info/rss" },
-				{ title: "Next INpact", icon: "https://www.nextinpact.com/Images/favicon.ico", uri: "https://www.nextinpact.com/rss/news.xml" },
-			],
+			feeds:      [ ],
 			feedsItems: [ ]
 		}
 	}
 
 	async componentDidMount() {
-		//Initialize persisted items
-		let persistedItems = await this.context.db.allDocs({ include_docs: true });
+		//Initialize persisted feeds items
+		let persistedItems = await this.context.db_feeds_items.allDocs({ include_docs: true });
 			persistedItems = persistedItems.rows.filter((item) => item.doc.unread === true);
 			persistedItems = persistedItems.map(item => item.doc);
 
-		this.setState({ loading: false, feedsItems: [...persistedItems] });
+		//Initialize persisted feeds
+		let persistedFeeds = await this.context.db_feeds.allDocs({ include_docs: true });
+			persistedFeeds = persistedFeeds.rows.map(feed => {
+				feed.doc.unread = persistedItems.filter((item) => item.feedId === feed.id);
+				feed.doc.unread = feed.doc.unread.map(item => item._id);
+
+				console.log(`Feed ${feed.id} has ${feed.doc.unread.length} unread.`);
+				return feed.doc;
+			});
+
+		this.setState({
+			loading:    false,
+			feeds:      [...persistedFeeds],
+			feedsItems: [...persistedItems]
+		});
 	}
 
 	render() {

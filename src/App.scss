@@ -22,7 +22,6 @@ html, body, #root {
 		flex-grow: 1;
 		flex-direction: column;
 		overflow: auto;
-		border-right:1px solid white;
 		min-width:250px;
 		max-width:250px;
 
@@ -49,7 +48,6 @@ html, body, #root {
 				height:40px;
 				padding:10px;
 				list-style-type: none;
-				border-bottom:1px solid $bg;
 				box-sizing: border-box;
 
 				&:hover {

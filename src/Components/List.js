@@ -14,11 +14,12 @@ class List extends Component {
 
 	componentDidMount() {
 		//Attach listener for new feed changes
-		this.listener = this.context.db.changes({
+		this.listener = this.context.db_feeds_items.changes({
 			since:        'now',
 			live:         true,
 			include_docs: true
 		}).on('change', (item) => {
+			//TODO: Improve mark as read should not trigger full render
 
 			//Is this item already exist
 			let isExist = this.state.items.filter(current => current._id == item.doc._id);
@@ -55,10 +56,10 @@ class List extends Component {
 
 		try {
 			//Mark as read
-			var item = await this.context.db.get(item._id);
+			var item = await this.context.db_feeds_items.get(item._id);
 				item.unread = false;
 
-			await this.context.db.put(item);
+			await this.context.db_feeds_items.put(item);
 		} catch(e) {
 			console.warn(`Unable to mark as read item: ${item._id} reason: ${e}`);
 		}
