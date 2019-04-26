@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { DbContext } from './Helpers/Db';
 import './App.scss';
 
 //Components
-import Feeds from './Components/Feeds';
-import List from './Components/List';
+import Feeds  from './Components/Feeds';
+import List   from './Components/List';
 import Viewer from './Components/Viewer';
 
 class App extends Component {
@@ -15,27 +16,31 @@ class App extends Component {
 			loading:    true,
 			feeds:      [
 				{ icon: "https://korben.info/app/themes/korben/dist/favicons/favicon-32x32.png", title: "Korben", uri: "https://korben.info/rss" },
+				{ icon: "https://www.nextinpact.com/Images/favicon.ico", title: "Next INpact", uri: "https://www.nextinpact.com/rss/news.xml" },
 			],
-			feedsItems: [
-				{ _id: 1, unread: true, icon: "https://korben.info/app/themes/korben/dist/favicons/favicon-32x32.png", title: "Les liens de la semaine #16", desc: "Coucou ! Vous l'attendiez avec impatience alors la voici, la voilà, ma sélection de liens de la semaine !...", date: new Date()},
-				{ _id: 2, unread: false, icon: "https://korben.info/app/themes/korben/dist/favicons/favicon-32x32.png", title: "X-Men Dark Phoenix", desc: "J'en peux plus des Avengers et ça je vous l'ai déjà dit...", date: new Date()}
-			]
+			feedsItems: [ ]
 		}
 	}
 
 	async componentDidMount() {
-		//TODO: fetch feeds db
+		//Initialize persisted items
+		//TODO: Should only render unread documents
+		let persistedItems = await this.context.db.allDocs({ include_docs: true });
+			persistedItems = persistedItems.rows.map((item) => item.doc);
+
+		this.setState({ loading: false, feedsItems: [...persistedItems] });
 	}
 
 	render() {
 		return (
 			<div className="App">
 				<Feeds feeds={this.state.feeds} />
-				<List list={this.state.feedsItems} />
+				<List  items={this.state.feedsItems} />
 				<Viewer />
 			</div>
 		);
 	}
 }
 
+App.contextType = DbContext;
 export default App;

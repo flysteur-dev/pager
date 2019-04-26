@@ -11,11 +11,15 @@ class Feeds extends Component {
 		}
 	}
 
+	addFeed = () => {
+		alert("Not implemented.");
+	}
+
 	render() {
 		return (
 			<div className="App-Feeds">
 				<h1>Pager</h1>
-				<button className="add">ADD (+)</button>
+				<button className="add" onClick={this.addFeed}>ADD (+)</button>
 				<ul>
 					{this.state.feeds.map((feed) => (
 						<Feed icon={feed.icon} title={feed.title} uri={feed.uri} />

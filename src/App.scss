@@ -14,7 +14,8 @@ html, body, #root {
 	height:100%;
 	background-color: $bg;
 	color:$text_secondary;
-	font-size: 13px;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
 
 	.App-Feeds {
 		display:flex;
@@ -22,6 +23,7 @@ html, body, #root {
 		flex-direction: column;
 		overflow: auto;
 		border-right:1px solid white;
+		min-width:250px;
 
 		h1 {
 			font-style: italic;
@@ -41,6 +43,7 @@ html, body, #root {
 			li {
 				display:flex;
 				align-items: center;
+				flex-wrap: nowrap;
 
 				height:40px;
 				padding:10px;
@@ -54,26 +57,30 @@ html, body, #root {
 				}
 
 				div {
+					height:100%;
+					line-height: 20px;
 
 					&.n { // unread
-						width:20px;
+						width:10%;
 						background-color:$red;
 						border-radius: 10px;
 						text-align: center;
 						color:white;
 						font-weight: bold;
-						font-size:12px;
+						font-size:11px;
 					}
 					&.i { // icon
-						flex-grow: 1;
+						width:10%;
 						text-align: center;
 
 						img {
 							width:16px;
 							height:16px;
+							margin-top:2px;
 						}
 					}
 					&.t { // feed title
+						width:80%;
 						flex-grow: 4;
 					}
 				}
@@ -116,6 +123,7 @@ html, body, #root {
 				}
 
 				div {
+
 					&.i { //icon
 						width:10%;
 						text-align: center;
@@ -123,6 +131,7 @@ html, body, #root {
 						img {
 							height:16px;
 							width:16px;
+							margin-top:2px;
 						}
 					}
 
