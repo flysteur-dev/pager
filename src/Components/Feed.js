@@ -38,7 +38,7 @@ class Feed extends Component {
 						unread: true
 					});
 				} catch(e) {
-					console.log(`Unable to add item: ${item.guid} to db reason: ${e}`);
+					//console.log(`Unable to add item: ${item.guid} to db reason: ${e}`);
 				}
 			});
 
