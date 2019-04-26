@@ -15,13 +15,22 @@ class List extends Component {
 	componentDidMount() {
 		//Attach listener for new feed changes
 		this.listener = this.context.db.changes({
-			since: 'now',
-			live: true,
+			since:        'now',
+			live:         true,
 			include_docs: true
 		}).on('change', (item) => {
 
-			//Add item to current feed list
-			this.setState({ items: [...this.state.items, ...[item.doc]]});
+			//Is this item already exist
+			let isExist = this.state.items.filter(current => current._id == item.doc._id);
+			if (isExist.length > 0) {
+				//Update existing item
+				this.setState({ items: this.state.items.map(current => (
+					current._id === item.doc._id ? Object.assign({}, current, item.doc) : current
+				))});
+			} else {
+				//Add new item to feed list
+				this.setState({ items: [...this.state.items, ...[item.doc]] });
+			}
 		});
 	}
 
@@ -37,14 +46,22 @@ class List extends Component {
 	}
 
 	// Open link target in a new tab or inside the embeded viewer
-	load = (e, item) => {
+	load = async (e, item) => {
 		if (false) {
 			//TODO: Dismiss default action and open it in embeded viewer
 			e.preventDefault();
 			return false;
 		}
 
-		//TODO: Mark as read
+		try {
+			//Mark as read
+			var item = await this.context.db.get(item._id);
+				item.unread = false;
+
+			await this.context.db.put(item);
+		} catch(e) {
+			console.warn(`Unable to mark as read item: ${item._id} reason: ${e}`);
+		}
 	}
 
 	render() {
