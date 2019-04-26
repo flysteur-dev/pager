@@ -123,6 +123,8 @@ html, body, #root {
 				}
 
 				div {
+					max-height: 40px;
+					overflow: hidden;
 
 					&.i { //icon
 						width:10%;

@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
+import moment from 'moment';
 import { DbContext } from '../Helpers/Db';
 
 class List extends Component {
@@ -66,16 +68,20 @@ class List extends Component {
 	}
 
 	render() {
+
+		//Order by date ASC
+		let orderedItems = _.sortBy(this.state.items, [(o) => { return -o.date }]);
+
 		return (
 			<div className="App-List">
 				<ul>
-					{this.state.items.map((item) => (
+					{orderedItems.map((item) => (
 						<a key={item._id} href={item.link} target="_blank" onClick={(e) => this.load(e, item)}>
 							<li className={item.unread ? 'unread' : ''}>
 								<div className="i"><img src={item.icon} /></div>
-								<div className="ts">{item.date}</div>
+								<div className="ts">{moment.unix(item.date).fromNow(true)}</div>
 								<div className="t">{item.title}</div>
-								<div className="d">{item.desc.substring(0, 100)}...</div>
+								<div className="d">{item.desc.substring(0, 200)}...</div>
 							</li>
 						</a>
 					))}

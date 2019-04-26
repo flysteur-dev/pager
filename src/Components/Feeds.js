@@ -23,7 +23,8 @@ class Feeds extends Component {
 		//TODO: Delete
 		let feeds = [
 			{ _id: "https://korben.info/rss", title: "Korben", icon: "https://korben.info/app/themes/korben/dist/favicons/favicon-32x32.png", uri: "https://korben.info/rss" },
-			{ _id: "https://www.nextinpact.com/rss/news.xml", title: "Next INpact", icon: "https://www.nextinpact.com/Images/favicon.ico", uri: "https://www.nextinpact.com/rss/news.xml" }
+			{ _id: "https://www.nextinpact.com/rss/nobrief-noih.xml", title: "Next INpact", icon: "https://www.nextinpact.com/Images/favicon.ico", uri: "https://www.nextinpact.com/rss/nobrief-noih.xml" },
+			{ _id: "https://www.lafermeduweb.net/tag/rss/sites.xml", title: "La Ferme du Web", icon: "https://assets.lafermeduweb.net/images/favicon/favicon-32x32.png", uri: "https://www.lafermeduweb.net/tag/rss/sites.xml"}
 		]
 
 		try {

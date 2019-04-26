@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import React, { Component } from 'react';
 import { DbContext } from '../Helpers/Db';
 import Parser from 'rss-parser';
@@ -31,13 +32,17 @@ class Feed extends Component {
 			let newItems = [];
 
 			feed.items.forEach(item => {
+
+				let date = item.isoDate || item.pubDate.replace(/CET|CEST/gi, '');
+				let ts   = moment(date).unix();
+
 				newItems.push({
 					_id:    item.guid,
 					feedId: this.state.id,
 					icon:   this.state.icon,
 					title:  item.title,
 					desc:   item.contentSnippet,
-					date:   item.isoDate,
+					date:   ts,
 					link:   item.link,
 					unread: true
 				});
@@ -80,7 +85,6 @@ class Feed extends Component {
 	}
 
 	render() {
-		console.error(this.state);
 		return (
 			<li onClick={this.filter}>
 				<div className="n">{(this.state.loading) ? '...' : this.state.unread.length}</div>
