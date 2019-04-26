@@ -66,7 +66,11 @@ class Feed extends Component {
 			live: true,
 			include_docs: true
 		}).on('change', (item) => {
-			//console.log("change item", item);
+
+			//Remove item from unread
+			if (_.indexOf(this.state.unread, item.doc._id) !== -1 && item.doc.unread === false) {
+				this.setState({unread: this.state.unread.filter(current => current !== item.doc._id)})
+			}
 		});
 	}
 
