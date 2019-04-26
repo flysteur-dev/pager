@@ -69,7 +69,7 @@ class List extends Component {
 
 	render() {
 
-		//Order by date ASC
+		//Order by date DESC
 		let orderedItems = _.sortBy(this.state.items, [(o) => { return -o.date }]);
 
 		return (

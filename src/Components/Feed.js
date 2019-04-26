@@ -2,6 +2,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import React, { Component } from 'react';
 import { DbContext } from '../Helpers/Db';
+import { PROXY_PATH } from '../Helpers/Constants';
 import Parser from 'rss-parser';
 
 class Feed extends Component {
@@ -25,7 +26,7 @@ class Feed extends Component {
 		this.onFeedChange();
 
 		let parser = new Parser();
-		let uri = `http://localhost:8080/${this.state.uri}`;
+		let uri = `${PROXY_PATH}${this.state.uri}`;
 
 		try {
 			let feed     = await parser.parseURL(uri);

@@ -1,0 +1,1 @@
+export const PROXY_PATH = 'http://localhost:8080/';
