@@ -8,7 +8,8 @@ class Feeds extends Component {
 		super(props);
 
 		this.state = {
-			feeds: this.props.feeds
+			rss: '',
+			feeds: this.props.feeds,
 		}
 	}
 
@@ -18,35 +19,51 @@ class Feeds extends Component {
 		}
 	}
 
+	handleChange = (event) => {
+		this.setState({rss: event.target.value});
+	}
+
 	closeFeed = () => {
 		// Hide feeds list
 		document.getElementsByClassName('App-Feeds')[0].classList.add("hide");
 	}
 
 	addFeed = async () => {
-		//Adding new feed
-		//TODO: Delete
-		let feeds = [
-			{ _id: "https://korben.info/rss", title: "Korben", icon: "https://korben.info/app/themes/korben/dist/favicons/favicon-32x32.png", uri: "https://korben.info/rss" },
-			{ _id: "https://www.nextinpact.com/rss/nobrief-noih.xml", title: "Next INpact", icon: "https://www.nextinpact.com/Images/favicon.ico", uri: "https://www.nextinpact.com/rss/nobrief-noih.xml" },
-			{ _id: "https://www.lafermeduweb.net/tag/rss/sites.xml", title: "La Ferme du Web", icon: "https://assets.lafermeduweb.net/images/favicon/favicon-32x32.png", uri: "https://www.lafermeduweb.net/tag/rss/sites.xml"}
-		]
-
-		try {
-			this.context.db_feeds.bulkDocs(feeds);
-			this.setState({ feeds });
-		} catch(e) {
-			//Unable to add feeds
+		if (this.state.rss == "") {
+			return;
 		}
 
-		alert("Not implemented.");
+		//TODO: Automaticaly add favicon
+		//TODO: Check url validity
+		let feed = {
+			_id:   this.state.rss,
+			title: this.state.rss,
+			uri:   this.state.rss,
+			icon:  ''
+		};
+
+		try {
+			await this.context.db_feeds.put(feed);
+			this.setState({rss: '', feeds: [...this.state.feeds, ...[feed]] });
+		} catch(e) {
+			console.error(`Unable to add feed: ${this.state.rss} reason: ${e}`);
+		}
 	}
 
 	render() {
 		return (
 			<div className="App-Feeds hide">
-				<h1>Pager <span class="App-Feeds-Toggle" onClick={this.closeFeed}>x</span></h1>
-				<button className="add" onClick={this.addFeed}>ADD (+)</button>
+				<h1>Pager <span className="App-Feeds-Toggle" onClick={this.closeFeed}>x</span></h1>
+				<input
+					className="App-Feeds-Input"
+					type="text"
+					ref={c => (this._input = c)}
+					value={this.state.rss}
+					onChange={this.handleChange}
+					placeholder="RSS feed ( xml / atom )"
+				/>
+				<button className="App-Feeds-Add" onClick={this.addFeed}>ADD (+)</button>
+
 				<ul>
 					{this.state.feeds.map((feed) => (
 						<Feed id={feed._id} icon={feed.icon} title={feed.title} uri={feed.uri} unread={feed.unread} />
