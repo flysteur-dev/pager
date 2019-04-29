@@ -44,7 +44,7 @@ class Feeds extends Component {
 
 	render() {
 		return (
-			<div className="App-Feeds">
+			<div className="App-Feeds hide">
 				<h1>Pager <span class="App-Feeds-Toggle" onClick={this.closeFeed}>x</span></h1>
 				<button className="add" onClick={this.addFeed}>ADD (+)</button>
 				<ul>
