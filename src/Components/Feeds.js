@@ -18,6 +18,11 @@ class Feeds extends Component {
 		}
 	}
 
+	closeFeed = () => {
+		// Hide feeds list
+		document.getElementsByClassName('App-Feeds')[0].classList.add("hide");
+	}
+
 	addFeed = async () => {
 		//Adding new feed
 		//TODO: Delete
@@ -40,7 +45,7 @@ class Feeds extends Component {
 	render() {
 		return (
 			<div className="App-Feeds">
-				<h1>Pager</h1>
+				<h1>Pager <span class="App-Feeds-Toggle" onClick={this.closeFeed}>x</span></h1>
 				<button className="add" onClick={this.addFeed}>ADD (+)</button>
 				<ul>
 					{this.state.feeds.map((feed) => (

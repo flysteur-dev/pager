@@ -18,20 +18,51 @@ html, body, #root {
 	font-size: 12px;
 
 	.App-Feeds {
+		position:absolute;
 		display:flex;
 		flex-grow: 1;
 		flex-direction: column;
 		overflow: auto;
-		min-width:250px;
-		max-width:250px;
+		height:100%;
+		width:100%;
+		background-color: $bg;
+		z-index:999;
+
+		&.hide {
+			display: none;
+			@media (min-width: 768px) { display:block; }
+		}
+
+		@media (min-width: 768px) {
+			position: initial;
+			min-width:250px;
+			max-width:250px;
+		}
+
+		.App-Feeds-Toggle {
+			width:40px;
+			font-size:15px;
+			position: absolute;
+			right:0;
+
+			background-color: $text_secondary;
+			color: white;
+			font-weight: bold;
+
+			@media (min-width: 768px) { display:none; }
+		}
 
 		h1 {
+			height:50px;
+			line-height:50px;
+			margin:0;
 			font-style: italic;
 			text-align:center;
 			color:$text_primary;
 		}
 
 		.add {
+			width:100%;
 			height:40px;
 			font-weight: bold;
 		}
@@ -39,6 +70,7 @@ html, body, #root {
 		ul {
 			margin:0;
 			padding:0;
+			overflow: auto;
 
 			li {
 				display:flex;
@@ -99,11 +131,35 @@ html, body, #root {
 		overflow: auto;
 		background-color:white;
 
+		.App-List-Options {
+			display: flex;
+			align-items: center;
+			position:fixed;
+			width:100%;
+			height:50px;
+			background-color:$bg;
+
+			button {
+				height: 50px;
+				width: 100px;
+				border: 0;
+				background-color: #c2300c;
+				color: white;
+				font-weight: bold;
+
+				@media (min-width: 768px) { display:none; }
+			}
+		}
+
 		ul {
 			margin:0;
 			padding:0;
+			margin-top:50px;
 
-			a  { text-decoration: none; }
+			a {
+				text-decoration: none;
+			}
+
 			li {
 				display:flex;
 				align-items: center;
@@ -138,17 +194,25 @@ html, body, #root {
 					}
 
 					&.ts { //time
+						display:none;
 						width:10%;
 					}
 
 					&.t { //title
-						width:30%;
+						width:90%;
 					}
 
 					&.d { //description
+						display:none;
 						width: 50%;
+						margin-left:10px;
 					}
 
+					@media (min-width: 768px) {
+						&.ts { display:block; }
+						&.t  { width:30%; }
+						&.d  { display:block; }
+					}
 				}
 			}
 		}

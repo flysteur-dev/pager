@@ -48,6 +48,10 @@ class List extends Component {
 		}
 	}
 
+	openFeedList = () => {
+		document.getElementsByClassName('App-Feeds')[0].classList.remove("hide");
+	}
+
 	// Open link target in a new tab or inside the embeded viewer
 	load = async (e, item) => {
 		if (false) {
@@ -74,14 +78,17 @@ class List extends Component {
 
 		return (
 			<div className="App-List">
+				<div className="App-List-Options">
+					<button onClick={this.openFeedList}>Feeds</button>
+				</div>
 				<ul>
 					{orderedItems.map((item) => (
 						<a key={item._id} href={item.link} target="_blank" onClick={(e) => this.load(e, item)}>
 							<li className={item.unread ? 'unread' : ''}>
 								<div className="i"><img src={item.icon} /></div>
 								<div className="ts">{moment.unix(item.date).fromNow(true)}</div>
-								<div className="t">{item.title}</div>
-								<div className="d">{item.desc.substring(0, 200)}...</div>
+								<div className="t">{item.title.substring(0, 150)}</div>
+								<div className="d">{item.desc.substring(0, 180)}...</div>
 							</li>
 						</a>
 					))}
