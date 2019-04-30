@@ -87,8 +87,8 @@ class List extends Component {
 							<li className={item.unread ? 'unread' : ''}>
 								<div className="i"><img src={item.icon} /></div>
 								<div className="ts">{moment.unix(item.date).fromNow(true)}</div>
-								<div className="t">{item.title.substring(0, 150)}</div>
-								<div className="d">{item.desc.substring(0, 180)}...</div>
+								<div className="t">{(item.title) ? item.title.substring(0, 150) : ''}</div>
+								<div className="d">{(item.desc) ? item.desc.substring(0, 180) : ''}...</div>
 							</li>
 						</a>
 					))}

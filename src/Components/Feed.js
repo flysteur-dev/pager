@@ -34,7 +34,7 @@ class Feed extends Component {
 
 			feed.items.forEach(item => {
 
-				let date = item.isoDate || item.pubDate.replace(/CET|CEST/gi, '');
+				let date = item.isoDate || (item.pubDate) ? item.pubDate.replace(/CET|CEST/gi, '') : moment();
 				let ts   = moment(date).unix();
 
 				newItems.push({
