@@ -59,6 +59,12 @@ html, body, #root {
 			font-style: italic;
 			text-align:center;
 			color:$text_primary;
+
+			img {
+				height:32px;
+				width:32px;
+				margin-top:10px;
+			}
 		}
 
 		.App-Feeds-Add {
@@ -77,6 +83,7 @@ html, body, #root {
 			text-indent: 10px;
 			background-color:white;
 			border:0;
+			outline:0;
 		}
 
 		ul {
