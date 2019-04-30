@@ -22,7 +22,7 @@ class Feeds extends Component {
 	}
 
 	handleChange = (event) => {
-		this.setState({rss: event.target.value});
+		this.setState({rss: event.target.value.trim()});
 	}
 
 	closeFeed = () => {
@@ -31,7 +31,7 @@ class Feeds extends Component {
 	}
 
 	addFeed = async () => {
-		if (this.state.rss == "") {
+		if (this.state.rss === "") {
 			return;
 		}
 
@@ -96,7 +96,7 @@ class Feeds extends Component {
 
 				<ul>
 					{this.state.feeds.map((feed) => (
-						<Feed id={feed._id} icon={feed.icon} title={feed.title} uri={feed.uri} unread={feed.unread} />
+						<Feed key={feed._id} id={feed._id} icon={feed.icon} title={feed.title} uri={feed.uri} unread={feed.unread} />
 					))}
 				</ul>
 			</div>

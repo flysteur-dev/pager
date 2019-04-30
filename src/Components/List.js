@@ -24,7 +24,7 @@ class List extends Component {
 			//TODO: Improve mark as read should not trigger full render
 
 			//Is this item already exist
-			let isExist = this.state.items.filter(current => current._id == item.doc._id);
+			let isExist = this.state.items.filter(current => current._id === item.doc._id);
 			if (isExist.length > 0) {
 				//Update existing item
 				this.setState({ items: this.state.items.map(current => (
@@ -83,7 +83,7 @@ class List extends Component {
 				</div>
 				<ul>
 					{orderedItems.map((item) => (
-						<a key={item._id} href={item.link} target="_blank" onClick={(e) => this.load(e, item)}>
+						<a key={item._id} href={item.link} onClick={(e) => this.load(e, item)} target="_blank" rel="noopener noreferrer">
 							<li className={item.unread ? 'unread' : ''}>
 								<div className="i"><img src={item.icon} /></div>
 								<div className="ts">{moment.unix(item.date).fromNow(true)}</div>
