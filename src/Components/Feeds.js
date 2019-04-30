@@ -54,7 +54,8 @@ class Feeds extends Component {
 			}
 
 			//Use google as favicon provider (o_O)
-			let icon = await fetch(`${PROXY_PATH}${FAVICON_PROVIDER}${this.state.rss}`);
+			let base = info.link || this.state.rss;
+			let icon = await fetch(`${PROXY_PATH}${FAVICON_PROVIDER}${base}`);
 			await icon.arrayBuffer().then((buffer) => {
 				//Read stream
 				var binary     = '';
@@ -89,7 +90,7 @@ class Feeds extends Component {
 					ref={c => (this._input = c)}
 					value={this.state.rss}
 					onChange={this.handleChange}
-					placeholder="Add your RSS feed here ( xml / atom )"
+					placeholder="Add your rss feed link here.."
 				/>
 				<button className="App-Feeds-Add" onClick={this.addFeed}>ADD (+)</button>
 
