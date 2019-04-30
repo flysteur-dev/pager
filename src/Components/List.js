@@ -10,7 +10,8 @@ class List extends Component {
 
 		this.listener = null;
 		this.state    = {
-			items: this.props.items
+			loading: true,
+			items:   this.props.items
 		}
 	}
 
@@ -44,7 +45,7 @@ class List extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.items !== this.props.items) {
-			this.setState({ items: nextProps.items });
+			this.setState({ loading: false, items: nextProps.items });
 		}
 	}
 
@@ -72,14 +73,21 @@ class List extends Component {
 	}
 
 	render() {
-		//Order by date DESC
-		let orderedItems = _.sortBy(this.state.items, [(o) => { return -o.date }]);
-		let emptyView    = (orderedItems.length === 0) ? (
+		let emptyView = (
 			<div className="App-List-Empty">
 				<h1>(o_O)</h1>
 				<p>There is nothing to see right now..</p>
 			</div>
-		) : null;
+		);
+		let loadingView = (
+			<div className="App-List-Empty">
+				<p>loading...</p>
+			</div>
+		);
+
+
+		//Order by date DESC
+		let orderedItems = _.sortBy(this.state.items, [(o) => { return -o.date }]);
 
 		return (
 			<div className="App-List">
@@ -99,7 +107,8 @@ class List extends Component {
 					))}
 				</ul>
 
-				{emptyView}
+				{(this.state.loading === true) && loadingView}
+				{(this.state.loading === false && orderedItems.length === 0) && emptyView}
 			</div>
 		);
 	}
