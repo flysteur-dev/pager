@@ -38,7 +38,7 @@ class Feed extends Component {
 				let ts   = moment(date).unix();
 
 				newItems.push({
-					_id:    item.guid,
+					_id:    item.guid || item.id,
 					feedId: this.state.id,
 					icon:   this.state.icon,
 					title:  item.title,
