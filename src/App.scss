@@ -157,6 +157,12 @@ html, body, #root {
 			}
 		}
 
+		.App-List-Empty {
+			display:flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
 		ul {
 			margin:0;
 			padding:0;

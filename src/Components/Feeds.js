@@ -32,6 +32,7 @@ class Feeds extends Component {
 
 	addFeed = async () => {
 		if (this.state.rss === "") {
+			alert("Please add rss feed link first.");
 			return;
 		}
 
@@ -90,7 +91,7 @@ class Feeds extends Component {
 					ref={c => (this._input = c)}
 					value={this.state.rss}
 					onChange={this.handleChange}
-					placeholder="Add your rss feed link here.."
+					placeholder="Add rss feed link here.."
 				/>
 				<button className="App-Feeds-Add" onClick={this.addFeed}>ADD (+)</button>
 

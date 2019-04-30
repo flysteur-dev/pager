@@ -72,9 +72,14 @@ class List extends Component {
 	}
 
 	render() {
-
 		//Order by date DESC
 		let orderedItems = _.sortBy(this.state.items, [(o) => { return -o.date }]);
+		let emptyView    = (orderedItems.length === 0) ? (
+			<div className="App-List-Empty">
+				<h1>(o_O)</h1>
+				<p>There is nothing to see right now..</p>
+			</div>
+		) : null;
 
 		return (
 			<div className="App-List">
@@ -93,6 +98,8 @@ class List extends Component {
 						</a>
 					))}
 				</ul>
+
+				{emptyView}
 			</div>
 		);
 	}
