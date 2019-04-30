@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { DbContext } from '../Helpers/Db';
+import { PROXY_PATH, FAVICON_PROVIDER } from '../Helpers/Constants';
+import Parser from 'rss-parser';
 import Feed from './Feed';
 
 class Feeds extends Component {
@@ -33,14 +35,41 @@ class Feeds extends Component {
 			return;
 		}
 
-		//TODO: Automaticaly add favicon
-		//TODO: Check url validity
 		let feed = {
 			_id:   this.state.rss,
-			title: this.state.rss,
 			uri:   this.state.rss,
+			title: this.state.rss,
 			icon:  ''
 		};
+
+		//Trying to fetch xml feed
+		try {
+			let parser = new Parser();
+			let uri = `${PROXY_PATH}${this.state.rss}`;
+
+			let info = await parser.parseURL(uri);
+			if (info.title) {
+				//Add feed title
+				feed.title = info.title;
+			}
+
+			//Use google as favicon provider (o_O)
+			let icon = await fetch(`${PROXY_PATH}${FAVICON_PROVIDER}${this.state.rss}`);
+			await icon.arrayBuffer().then((buffer) => {
+				//Read stream
+				var binary     = '';
+				var bytes      = [].slice.call(new Uint8Array(buffer));
+					bytes.forEach((b) => binary += String.fromCharCode(b));
+				var imageStr   = window.btoa(binary);
+
+				//Save icon as base64
+				feed.icon = `data:image/png;base64,${imageStr}`;
+			});
+		} catch (e) {
+			console.error(`Unable to add feed: ${this.state.rss} reason: ${e}`);
+			alert("Ooops something goes wrong..");
+			return;
+		}
 
 		try {
 			await this.context.db_feeds.put(feed);
@@ -60,7 +89,7 @@ class Feeds extends Component {
 					ref={c => (this._input = c)}
 					value={this.state.rss}
 					onChange={this.handleChange}
-					placeholder="RSS feed ( xml / atom )"
+					placeholder="Add your RSS feed here ( xml / atom )"
 				/>
 				<button className="App-Feeds-Add" onClick={this.addFeed}>ADD (+)</button>
 

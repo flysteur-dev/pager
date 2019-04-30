@@ -87,10 +87,10 @@ class Feed extends Component {
 
 	render() {
 		return (
-			<li onClick={this.filter}>
+			<li onClick={this.filter} title={this.state.title}>
 				<div className="n">{(this.state.loading) ? '...' : this.state.unread.length}</div>
 				<div className="i"><img src={this.state.icon} /></div>
-				<div className="t">{this.state.title}</div>
+				<div className="t">{this.state.title.substring(0, 30)}</div>
 			</li>
 		)
 	}
