@@ -36,6 +36,11 @@ class Feeds extends Component {
 			return;
 		}
 
+		if (!/^(http|https):\/\//.test(this.state.rss)) {
+			alert("Missing http/https scheme.");
+			return;
+		}
+
 		let feed = {
 			_id:   this.state.rss,
 			uri:   this.state.rss,
