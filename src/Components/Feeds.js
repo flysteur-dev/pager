@@ -100,7 +100,7 @@ class Feeds extends Component {
 	render() {
 		return (
 			<div className="App-Feeds hide">
-				<h1><img src="/favicon.png" /> <span className="App-Feeds-Toggle" onClick={this.closeFeed}>x</span></h1>
+				<h1><img src={process.env.PUBLIC_URL + '/favicon.png' } /> <span className="App-Feeds-Toggle" onClick={this.closeFeed}>x</span></h1>
 				<input
 					className="App-Feeds-Input"
 					type="text"

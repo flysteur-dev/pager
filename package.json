@@ -2,7 +2,7 @@
   "name": "pager",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://flysteur-dev.github.io/pager",
+  "homepage": ".",
   "dependencies": {
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
