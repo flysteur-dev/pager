@@ -10,8 +10,9 @@ class Feeds extends Component {
 		super(props);
 
 		this.state = {
-			rss: '',
-			feeds: this.props.feeds,
+			rss:     '',
+			loading: false,
+			feeds:   this.props.feeds,
 		}
 	}
 
@@ -31,6 +32,7 @@ class Feeds extends Component {
 	}
 
 	addFeed = async () => {
+		// Test feed validity
 		if (this.state.rss === "") {
 			alert("Please add rss feed link first.");
 			return;
@@ -40,6 +42,9 @@ class Feeds extends Component {
 			alert("Missing http/https scheme.");
 			return;
 		}
+
+		// Loader
+		this.setState({ loading: true });
 
 		let feed = {
 			_id:   this.state.rss,
@@ -73,6 +78,7 @@ class Feeds extends Component {
 				feed.icon = `data:image/png;base64,${imageStr}`;
 			});
 		} catch (e) {
+			this.setState({ loading: false });
 			console.error(`Unable to add feed: ${this.state.rss} reason: ${e}`);
 			alert("Ooops something goes wrong..");
 			return;
@@ -80,8 +86,13 @@ class Feeds extends Component {
 
 		try {
 			await this.context.db_feeds.put(feed);
-			this.setState({rss: '', feeds: [...this.state.feeds, ...[feed]] });
+			this.setState({
+				loading: false,
+				rss:     '',
+				feeds:   [...this.state.feeds, ...[feed]]
+			});
 		} catch(e) {
+			this.setState({ loading: false });
 			console.error(`Unable to add feed: ${this.state.rss} reason: ${e}`);
 		}
 	}
@@ -98,7 +109,20 @@ class Feeds extends Component {
 					onChange={this.handleChange}
 					placeholder="Add rss feed link here.."
 				/>
-				<button className="App-Feeds-Add" onClick={this.addFeed}>ADD (+)</button>
+
+				{this.state.loading ? (
+					<button
+						disabled
+						className="App-Feeds-Add">
+						LOADING...
+					</button>
+				) : (
+					<button
+						className="App-Feeds-Add"
+						onClick={this.addFeed}>
+						ADD (+)
+					</button>
+				)}
 
 				<ul>
 					{this.state.feeds.map((feed) => (
