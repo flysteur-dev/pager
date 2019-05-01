@@ -9,7 +9,7 @@
 ## Demo
 
 [Try it](https://flysteur-dev.github.io/pager/) with your mobile phone or desktop browser.<br>
-Want to keep it ? add it to your dashboard !
+Want to keep it? Add it to your dashboard!
 
 Note: This demo is using [cors-anywhere](https://github.com/Rob--W/cors-anywhere) and may not be working or subject to usage restriction.<br>
 Prefer using the docker image, who is using a built in nginx reverse proxy to get around of CORS restriction, see instruction below.
@@ -27,17 +27,17 @@ Prefer using the docker image, who is using a built in nginx reverse proxy to ge
 
 "Read and Run Everywhere.."<br><br>
 
-Pager want to be a very very minimalist rss reader.<br>
+Pager wants to be a very very minimalist rss reader.<br>
 It will ever only use web technologies and will stay as much as possible serverless** to be truly multi-platform.<br>
-Optionnally (later) it will offer syncing option to share feeds between instance (desktop, mobile, etc..)<br><br>
+Optionnally (later) it will offer syncing option to share feeds between instances (desktop, mobile, etc..)<br><br>
 
-Pager doesn't have many dependencies and aim to keep code understandable.<br><br>
+Pager doesn't have many dependencies and aims to keep code understandable.<br><br>
 
 Main dependencies (thanks to) :<br>
 - [rss-parser](https://github.com/bobby-brennan/rss-parser) : A small library for turning RSS XML feeds into JS objects.
 - [pouchdb](https://github.com/pouchdb/pouchdb) : JS database to work offline and inspired by [CouchDB](http://couchdb.apache.org/)
 
-** The web based require at least a reverse proxy to get around CORS restriction to fetch feed over another domain.
+** The Web App requires at least a reverse proxy to get around CORS restriction to fetch feed over another domain.
 
 ## Roadmap
 
