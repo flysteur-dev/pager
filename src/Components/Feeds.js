@@ -23,7 +23,7 @@ class Feeds extends Component {
 	}
 
 	handleChange = (event) => {
-		this.setState({rss: event.target.value.trim()});
+		this.setState({ rss: event.target.value.toLowerCase().trim()});
 	}
 
 	closeFeed = () => {
