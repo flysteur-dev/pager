@@ -156,7 +156,7 @@ html, body, #root {
 				height: 50px;
 				width: 100px;
 				border: 0;
-				background-color: #c2300c;
+				background-color: $red;
 				color: white;
 				font-weight: bold;
 
@@ -168,6 +168,26 @@ html, body, #root {
 			display:flex;
 			flex-direction: column;
 			align-items: center;
+		}
+
+		.App-List-Mark-As-Read-Button {
+			display:flex;
+			justify-content: center;
+
+			margin:auto;
+			width:45%;
+			cursor:pointer;
+
+			p {
+				height: 15px;
+				line-height: 15px;
+				padding: 10px;
+				background-color:$red;
+				border-radius: 10px;
+				text-align: center;
+				color: white;
+				font-weight: bold;
+			}
 		}
 
 		ul {

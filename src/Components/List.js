@@ -50,7 +50,22 @@ class List extends Component {
 	}
 
 	openFeedList = () => {
+		//Only mobile
+		//Open left panel to manage feeds
 		document.getElementsByClassName('App-Feeds')[0].classList.remove("hide");
+	}
+
+	markAllAsRead = async () => {
+		try {
+			//Mark all items as read
+			let items = this.state.items;
+			items.map((item) => { item.unread = false; })
+
+			//Bulk update
+			await this.context.db_feeds_items.bulkDocs(items);
+		} catch (e) {
+			console.warn(`Unable to mark all as read, reason: ${e}`);
+		}
 	}
 
 	// Open link target in a new tab or inside the embeded viewer
@@ -84,10 +99,18 @@ class List extends Component {
 				<p>loading...</p>
 			</div>
 		);
+		let markAsReadButton = (
+			<div className="App-List-Mark-As-Read-Button" onClick={this.markAllAsRead}>
+				<p>MARK ALL AS READ</p>
+			</div>
+		);
 
 
 		//Order by date DESC
 		let orderedItems = _.sortBy(this.state.items, [(o) => { return -o.date }]);
+
+		//Unread items
+		let unreadItems  = this.state.items.filter(item => item.unread === true);
 
 		return (
 			<div className="App-List">
@@ -109,6 +132,7 @@ class List extends Component {
 
 				{(this.state.loading === true) && loadingView}
 				{(this.state.loading === false && orderedItems.length === 0) && emptyView}
+				{(unreadItems.length > 0) && markAsReadButton}
 			</div>
 		);
 	}
