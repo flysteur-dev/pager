@@ -8,7 +8,7 @@
 
 ## Demo
 
-[Try it](https://flysteur-dev.github.io/pager/) with your mobile phone or desktop browser.<br>
+[Try it](https://pager.run) with your mobile phone or desktop browser.<br>
 Want to keep it? Add it to your dashboard!
 
 Note: This demo is using [cors-anywhere](https://github.com/Rob--W/cors-anywhere) and may not be working or subject to usage restriction.<br>
@@ -28,7 +28,7 @@ Prefer using the docker image, who is using a built in nginx reverse proxy to ge
 "Read and Run Everywhere.."<br><br>
 
 Pager wants to be a very very minimalist rss reader.<br>
-It will ever only use web technologies and will stay as much as possible serverless** to be truly multi-platform.<br>
+It will ever only use web technologies and will stay as much as possible serverless** with business logic in the client side.<br>
 Optionnally (later) it will offer syncing option to share feeds between instances (desktop, mobile, etc..)<br><br>
 
 Pager doesn't have many dependencies and aims to keep code understandable.<br><br>
