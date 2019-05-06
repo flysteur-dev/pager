@@ -320,7 +320,7 @@ html, body, #root {
 
 			img, iframe, div {
 				//Force content to fixed size
-				width:100% !important;
+				max-width:100% !important;
 				height:auto !important;
 			}
 
