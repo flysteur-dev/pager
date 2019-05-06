@@ -55,7 +55,11 @@ class Viewer extends Component {
 			<div className={this.state.active ? 'App-Viewer active' : 'App-Viewer'}>
 				<div className="App-Viewer-Options">
 					<button className="App-Viewer-Options-Close" onClick={this.close}>X</button>
-					<a target="_blank" href={this.state.link}><button>OPEN</button></a>
+					<a
+						target="_blank"
+						href={this.state.link}
+						onClick={this.close}>
+					<button>OPEN</button></a>
 					<button onClick={this.favorite}>&#9733;</button>
 					<button onClick={this.share}>SHARE</button>
 				</div>
