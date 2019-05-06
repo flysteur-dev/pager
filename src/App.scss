@@ -269,7 +269,6 @@ html, body, #root {
 		flex-grow: 3;
 		overflow: auto;
 		background-color:white;
-		border-left:1px solid $bg;
 		box-sizing: border-box;
 		color:$text_primary;
 
@@ -335,6 +334,7 @@ html, body, #root {
 
 		@media (min-width: 768px) {
 			position:inherit;
+			border-left:1px solid $bg;
 		}
 	}
 
