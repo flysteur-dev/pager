@@ -44,7 +44,7 @@ Main dependencies (thanks to) :<br>
 - [x] Offline
 - [x] Feed subscription
 - [x] Web App
-- [ ] Read article in viewer
+- [x] Read article in viewer
 - [ ] Multi view option (compact, large)
 - [ ] Dark mode
 - [ ] Keyboard shortcuts
