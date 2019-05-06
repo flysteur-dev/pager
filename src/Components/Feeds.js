@@ -9,11 +9,20 @@ class Feeds extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
+		this.lastupdate = 0
+		this.state      = {
 			rss:     '',
 			loading: false,
 			feeds:   this.props.feeds,
 		}
+	}
+
+	componentDidMount() {
+		document.addEventListener("visibilitychange", this.handleAppForeground);
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener("visibilitychange", this.handleAppForeground)
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -24,6 +33,21 @@ class Feeds extends Component {
 
 	handleChange = (event) => {
 		this.setState({ rss: event.target.value.toLowerCase().trim()});
+	}
+
+	handleAppForeground = (event) => {
+		//Trigger automatic update on app foreground
+		//Update only if lastupdate < 1 minute
+		//User can still force update with pull-to-refresh
+		if (this.lastupdate <= (Date.now() / 1000).toFixed() - 60) {
+			let feeds       = this.state.feeds;
+			this.lastupdate = (Date.now() / 1000).toFixed();
+
+			//Force update
+			//TODO: (0_') burk..
+			this.setState({ feeds: [] });
+			this.setState({ feeds });
+		}
 	}
 
 	closeFeed = () => {
