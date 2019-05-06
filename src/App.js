@@ -14,6 +14,7 @@ class App extends Component {
 
 		this.state = {
 			loading:    true,
+			viewer:     null,
 			feeds:      [ ],
 			feedsItems: [ ]
 		}
@@ -42,12 +43,16 @@ class App extends Component {
 		});
 	}
 
+	openViewer = (item) => {
+		this.setState({ viewer: item });
+	}
+
 	render() {
 		return (
 			<div className="App">
-				<Feeds feeds={this.state.feeds} />
-				<List  items={this.state.feedsItems} />
-				<Viewer />
+				<Feeds  feeds={this.state.feeds} />
+				<List   items={this.state.feedsItems} openViewer={this.openViewer} />
+				<Viewer viewer={this.state.viewer} />
 			</div>
 		);
 	}

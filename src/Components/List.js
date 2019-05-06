@@ -70,11 +70,9 @@ class List extends Component {
 
 	// Open link target in a new tab or inside the embeded viewer
 	load = async (e, item) => {
-		if (false) {
-			//TODO: Dismiss default action and open it in embeded viewer
-			e.preventDefault();
-			return false;
-		}
+		//Dismiss default action and open it in embeded viewer
+		e.preventDefault();
+		this.props.openViewer(item);
 
 		try {
 			//Mark as read
@@ -91,7 +89,7 @@ class List extends Component {
 		let emptyView = (
 			<div className="App-List-Empty">
 				<h1>(o_O)</h1>
-				<p>There is nothing to see right now..</p>
+				<p>There is nothing to read right now..</p>
 			</div>
 		);
 		let loadingView = (

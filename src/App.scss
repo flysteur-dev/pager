@@ -3,6 +3,11 @@ $text_primary: #1f1f2e;
 $text_secondary: #697789;
 $red:  #c2300c;
 
+* {
+	-webkit-tap-highlight-color: transparent;
+	outline: 0;
+}
+
 html, body, #root {
 	margin:0;
 	padding:0;
@@ -40,7 +45,7 @@ html, body, #root {
 		}
 
 		.App-Feeds-Toggle {
-			width:40px;
+			width:100px;
 			font-size:15px;
 			position: absolute;
 			left:0;
@@ -147,7 +152,7 @@ html, body, #root {
 			display: flex;
 			align-items: center;
 			position:fixed;
-			width:100%;
+			min-width:100%;
 			height:50px;
 			background-color:$bg;
 
@@ -180,7 +185,7 @@ html, body, #root {
 			p {
 				height: 15px;
 				line-height: 15px;
-				padding: 10px;
+				padding: 8px;
 				background-color:$red;
 				border-radius: 10px;
 				text-align: center;
@@ -197,6 +202,7 @@ html, body, #root {
 			a {
 				text-decoration: none;
 				outline: 0;
+				user-select: none;
 			}
 
 			li {
@@ -259,10 +265,77 @@ html, body, #root {
 
 	.App-Viewer {
 		display:none;
+		position: absolute;
 		flex-grow: 3;
 		overflow: auto;
 		background-color:white;
 		border-left:1px solid $bg;
+		box-sizing: border-box;
+		color:$text_primary;
+
+		&.active {
+			display:flex;
+			flex-direction: column;
+
+			width:100%;
+			height:100%;
+		}
+
+		.App-Viewer-Options {
+			display: flex;
+			align-items: center;
+			position:fixed;
+			width:100%;
+			height:50px;
+			background-color:$bg;
+
+			button {
+				height: 50px;
+				min-width:60px;
+				border: 0;
+				background-color: $red;
+				color: white;
+				font-weight: bold;
+				cursor:pointer;
+				border-left:1px solid white;
+
+				&.App-Viewer-Options-Close {
+					width:100px;
+					background-color: $text_secondary;
+					border:0;
+				}
+			}
+		}
+
+		.App-Viewer-Title {
+			margin-top: 50px;
+			padding-left:15px;
+			padding-right:15px;
+		}
+
+		.App-Viewer-Content {
+			padding-left:15px;
+			padding-right:15px;
+			padding-bottom:15px;
+
+			img, iframe, div {
+				//Force content to fixed size
+				width:100% !important;
+				height:auto !important;
+			}
+
+			a {
+				//Disabling embedded links
+				color:$text_primary;
+				text-decoration: none;
+				pointer-events: none;
+				cursor: default;
+			}
+		}
+
+		@media (min-width: 768px) {
+			position:inherit;
+		}
 	}
 
 }
