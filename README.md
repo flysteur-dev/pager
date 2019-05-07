@@ -45,10 +45,11 @@ Main dependencies (thanks to) :<br>
 - [x] Feed subscription
 - [x] Web App
 - [x] Read article in viewer
+- [x] Media sharing (require chrome 75 or fallback to clipboard)
+- [x] Adding article to favorite
 - [ ] Multi view option (compact, large)
 - [ ] Dark mode
 - [ ] Keyboard shortcuts
-- [ ] Media sharing
 - [ ] Web worker to refresh feeds in background
 - [ ] Syncing using couchDB
 - [ ] Desktop app using electron
