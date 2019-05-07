@@ -119,7 +119,7 @@ class List extends Component {
 					{orderedItems.map((item) => (
 						<a key={item._id} href={item.link} onClick={(e) => this.load(e, item)} target="_blank" rel="noopener noreferrer">
 							<li className={item.unread ? 'unread' : ''}>
-								<div className="i"><img src={item.icon} /></div>
+								<div className="i"><img alt="icon" src={item.icon} /></div>
 								<div className="ts">{moment.unix(item.date).fromNow(true)}</div>
 								<div className="t">{(item.title) ? item.title.substring(0, 150) : ''}</div>
 								<div className="d">{(item.desc) ? item.desc.substring(0, 180) : ''}...</div>

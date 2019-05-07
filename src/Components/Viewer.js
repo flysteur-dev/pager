@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { DbContext } from '../Helpers/Db';
 
 class Viewer extends Component {
 
@@ -7,14 +8,15 @@ class Viewer extends Component {
 		super(props);
 
 		this.state = {
-			_id:     null,
-			_rev:    null,
-			icon:    null,
-			title:   null,
-			date:    null,
-			content: null,
-			link:    null,
-			active:  false
+			_id:      null,
+			_rev:     null,
+			icon:     null,
+			title:    null,
+			date:     null,
+			content:  null,
+			link:     null,
+			favorite: false,
+			active:   false
 		}
 	}
 
@@ -22,14 +24,15 @@ class Viewer extends Component {
 		let viewer = nextProps.viewer;
 		if (viewer) {
 			this.setState({
-				_id:     viewer._id,
-				_rev:    viewer._rev,
-				icon:    viewer.icon,
-				title:   viewer.title,
-				date:    viewer.date,
-				content: viewer.content,
-				link:    viewer.link,
-				active:  true
+				_id:      viewer._id,
+				_rev:     viewer._rev,
+				icon:     viewer.icon,
+				title:    viewer.title,
+				date:     viewer.date,
+				content:  viewer.content,
+				link:     viewer.link,
+				favorite: viewer.favorite || false,
+				active:   true
 			});
 		}
 	}
@@ -40,9 +43,17 @@ class Viewer extends Component {
 		this.setState({ active: false, content: null });
 	}
 
-	favorite = () => {
-		alert("Favorite not implemented.");
-		return false;
+	favorite = async () => {
+		try {
+			//Toggle favorite
+			var item = await this.context.db_feeds_items.get(this.state._id);
+			item.favorite = !this.state.favorite;
+
+			await this.context.db_feeds_items.put(item);
+			this.setState({ favorite: item.favorite });
+		} catch (e) {
+			console.warn(`Unable to toggle favorite item: ${this.state._id} reason: ${e}`);
+		}
 	}
 
 	share = () => {
@@ -73,16 +84,17 @@ class Viewer extends Component {
 				<div className="App-Viewer-Options">
 					<button className="App-Viewer-Options-Close" onClick={this.close}>&#10005;</button>
 					<a
+						rel="noopener noreferrer"
 						target="_blank"
 						href={this.state.link}
 						onClick={this.close}>
 					<button>&#8505;</button></a>
-					<button onClick={this.favorite}>&#9734;</button>
 					<button onClick={this.share}>&#9741;</button>
+					<button onClick={this.favorite}>{this.state.favorite ? '★' : '☆'}</button>
 				</div>
 
 				<div className="App-Viewer-Title">
-					<h1><img src={this.state.icon} /> {this.state.title}</h1>
+					<h1><img alt="icon" src={this.state.icon} /> {this.state.title}</h1>
 					<p>{moment.unix(this.state.date).format("LLLL")}</p>
 				</div>
 
@@ -93,4 +105,5 @@ class Viewer extends Component {
 	}
 }
 
+Viewer.contextType = DbContext;
 export default Viewer;

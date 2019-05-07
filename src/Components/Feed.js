@@ -38,15 +38,16 @@ class Feed extends Component {
 				let ts   = moment(date).unix();
 
 				newItems.push({
-					_id:     item.guid || item.id,
-					feedId:  this.state.id,
-					icon:    this.state.icon,
-					title:   item.title,
-					desc:    item.contentSnippet,
-					content: item["content:encoded"] || item.content,
-					date:    ts,
-					link:    item.link,
-					unread:  true
+					_id:      item.guid || item.id,
+					feedId:   this.state.id,
+					icon:     this.state.icon,
+					title:    item.title,
+					desc:     item.contentSnippet,
+					content:  item["content:encoded"] || item.content,
+					date:     ts,
+					link:     item.link,
+					unread:   true,
+					favorite: false,
 				});
 			});
 
