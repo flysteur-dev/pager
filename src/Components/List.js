@@ -145,7 +145,7 @@ class List extends Component {
 		return (
 			<div className="App-List">
 				<div className="App-List-Options">
-					<button onClick={this.openFeedList} className="App-List-Options-Open-Feeds">☉ Feeds</button>
+					<button onClick={this.openFeedList} className="App-List-Options-Open-Feeds">Feeds</button>
 					<button onClick={this.showFavoriteItems} title="Show only favorites" className={this.state.optionFavorite && 'active'}>★</button>
 					<button onClick={this.switchDisplayMode} title="Switch to compact view">☷</button>
 				</div>
