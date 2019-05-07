@@ -46,23 +46,41 @@ class Viewer extends Component {
 	}
 
 	share = () => {
-		alert("Sharing not implemented.");
-		return false;
+		if (navigator && navigator.share) {
+			navigator.share({
+				title: this.state.title,
+				text:  this.state.title,
+				url:   this.state.link,
+			});
+		} else {
+			//If web share is not available
+			//Copy link to clipboard
+			const el = document.createElement('textarea');
+			el.value = this.state.link;
+			el.style.position = 'absolute';
+			el.style.left = '-9999px';
+			document.body.appendChild(el);
+			el.select();
+			document.execCommand('copy');
+			document.body.removeChild(el);
+			alert("Copied to clipboard!");
+		}
 	}
 
 	render() {
 		return (
 			<div className={this.state.active ? 'App-Viewer active' : 'App-Viewer'}>
 				<div className="App-Viewer-Options">
-					<button className="App-Viewer-Options-Close" onClick={this.close}>X</button>
+					<button className="App-Viewer-Options-Close" onClick={this.close}>&#10005;</button>
 					<a
 						target="_blank"
 						href={this.state.link}
 						onClick={this.close}>
-					<button>OPEN</button></a>
-					<button onClick={this.favorite}>&#9733;</button>
-					<button onClick={this.share}>SHARE</button>
+					<button>&#8505;</button></a>
+					<button onClick={this.favorite}>&#9734;</button>
+					<button onClick={this.share}>&#9741;</button>
 				</div>
+
 				<div className="App-Viewer-Title">
 					<h1><img src={this.state.icon} /> {this.state.title}</h1>
 					<p>{moment.unix(this.state.date).format("LLLL")}</p>
@@ -73,7 +91,6 @@ class Viewer extends Component {
 			</div>
 		)
 	}
-
 }
 
 export default Viewer;
