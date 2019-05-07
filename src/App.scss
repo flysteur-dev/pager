@@ -3,6 +3,8 @@ $text_primary: #1f1f2e;
 $text_secondary: #697789;
 $red:  #c2300c;
 
+::-moz-focus-inner {border:0;}
+
 * {
 	-webkit-tap-highlight-color: transparent;
 	outline: 0;
@@ -158,13 +160,29 @@ html, body, #root {
 
 			button {
 				height: 50px;
-				width: 100px;
+				min-width:60px;
 				border: 0;
-				background-color: $red;
-				color: white;
+				background-color: white;
+				color: $red;
 				font-weight: bold;
+				cursor:pointer;
+				font-size: 15px;
+				border-right: 1px solid $bg;
 
-				@media (min-width: 768px) { display:none; }
+				&.active {
+					background-color: $red;
+					color:white;
+				}
+
+				&.App-List-Options-Open-Feeds {
+					width:100px;
+					background-color: $text_secondary;
+					color:white;
+					border:0;
+
+					//Only for mobile
+					@media (min-width: 768px) { display:none; }
+				}
 			}
 		}
 
@@ -292,16 +310,17 @@ html, body, #root {
 				height: 50px;
 				min-width:60px;
 				border: 0;
-				background-color: $red;
-				color: white;
+				background-color: white;
+				color: $red;
 				font-weight: bold;
 				cursor:pointer;
 				font-size: 15px;
-				border-left:1px solid white;
+				border-right: 1px solid $bg;
 
 				&.App-Viewer-Options-Close {
 					width:100px;
 					background-color: $text_secondary;
+					color:white;
 					border:0;
 				}
 			}

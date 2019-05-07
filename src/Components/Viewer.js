@@ -88,9 +88,9 @@ class Viewer extends Component {
 						target="_blank"
 						href={this.state.link}
 						onClick={this.close}>
-					<button>&#8505;</button></a>
-					<button onClick={this.share}>&#9741;</button>
-					<button onClick={this.favorite}>{this.state.favorite ? '★' : '☆'}</button>
+					<button title="Open to new tab">&#8505;</button></a>
+					<button title="Share link" onClick={this.share}>&#9741;</button>
+					<button title="Add to favorite" onClick={this.favorite}>{this.state.favorite ? '★' : '☆'}</button>
 				</div>
 
 				<div className="App-Viewer-Title">

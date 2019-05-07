@@ -11,7 +11,10 @@ class List extends Component {
 		this.listener = null;
 		this.state    = {
 			loading: true,
-			items:   this.props.items
+			items:   this.props.items,
+
+			//Is option is activated
+			optionFavorite: false
 		}
 	}
 
@@ -55,9 +58,9 @@ class List extends Component {
 		document.getElementsByClassName('App-Feeds')[0].classList.remove("hide");
 	}
 
+	//Mark all items as read
 	markAllAsRead = async () => {
 		try {
-			//Mark all items as read
 			let items = this.state.items;
 			items.map((item) => { item.unread = false; })
 
@@ -66,6 +69,35 @@ class List extends Component {
 		} catch (e) {
 			console.warn(`Unable to mark all as read, reason: ${e}`);
 		}
+	}
+
+	//Show only favorite items
+	//Can be used as read it later feature
+	showFavoriteItems = async () => {
+		this.setState({ loading: true, items: [], optionFavorite: !this.state.optionFavorite });
+
+		if (this.state.optionFavorite === false) {
+			//Storing old state
+			this.oldItems = this.state.items;
+
+			//Fetching favorite items
+			let favoriteItems = await this.context.db_feeds_items.allDocs({ include_docs: true });
+			favoriteItems = favoriteItems.rows.filter((item) => item.doc.favorite === true);
+			favoriteItems = favoriteItems.map(item => item.doc);
+
+			this.setState({ loading: false, items: favoriteItems });
+		} else {
+			//Restoring old state
+			this.setState({ loading: false, items: this.oldItems });
+			delete this.oldItems;
+		}
+	}
+
+	//TODO: Switch display mode
+	//Compact - Full
+	switchDisplayMode = () => {
+		alert("Display mode is not implemented yet.");
+		return false;
 	}
 
 	// Open link target in a new tab or inside the embeded viewer
@@ -113,7 +145,9 @@ class List extends Component {
 		return (
 			<div className="App-List">
 				<div className="App-List-Options">
-					<button onClick={this.openFeedList}>Feeds</button>
+					<button onClick={this.openFeedList} className="App-List-Options-Open-Feeds">☉ Feeds</button>
+					<button onClick={this.showFavoriteItems} title="Show only favorites" className={this.state.optionFavorite && 'active'}>★</button>
+					<button onClick={this.switchDisplayMode} title="Switch to compact view">☷</button>
 				</div>
 				<ul>
 					{orderedItems.map((item) => (
