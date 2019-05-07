@@ -45,7 +45,7 @@ Main dependencies (thanks to) :<br>
 - [x] Feed subscription
 - [x] Web App
 - [x] Read article in viewer
-- [x] Media sharing (require chrome 75 or fallback to clipboard)
+- [x] Media sharing (require chrome 74 or fallback to clipboard)
 - [x] Adding article to favorite
 - [ ] Multi view option (compact, large)
 - [ ] Dark mode
