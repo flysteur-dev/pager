@@ -13,6 +13,7 @@ class Feeds extends Component {
 		this.state      = {
 			rss:     '',
 			loading: false,
+			loaded:  0,
 			feeds:   this.props.feeds,
 		}
 	}
@@ -121,42 +122,52 @@ class Feeds extends Component {
 		}
 	}
 
+	onFeedLoad = () => {
+		// Listening feed load
+		this.setState({ loaded: this.state.loaded + 1 });
+	}
+
 	render() {
 		return (
-			<div className="App-Feeds hide">
-				<h1>
-					<img alt="pager" src={process.env.PUBLIC_URL + '/favicon.png'} />
-					<span className="App-Feeds-Toggle" onClick={this.closeFeed}>&#10005;</span>
-				</h1>
+			<div className="App-Feeds-Container">
+				<div className="App-Feeds-Loader">
+					{ this.state.feeds.length !== this.state.loaded && <div class="loader"></div> }
+				</div>
+				<div className="App-Feeds hide">
+					<h1>
+						<img alt="pager" src={process.env.PUBLIC_URL + '/favicon.png'} />
+						<span className="App-Feeds-Toggle" onClick={this.closeFeed}>&#10005;</span>
+					</h1>
 
-				<input
-					className="App-Feeds-Input"
-					type="text"
-					ref={c => (this._input = c)}
-					value={this.state.rss}
-					onChange={this.handleChange}
-					placeholder="Add rss feed link here.."
-				/>
+					<input
+						className="App-Feeds-Input"
+						type="text"
+						ref={c => (this._input = c)}
+						value={this.state.rss}
+						onChange={this.handleChange}
+						placeholder="Add rss feed link here.."
+					/>
 
-				{this.state.loading ? (
-					<button
-						disabled
-						className="App-Feeds-Add">
-						LOADING...
-					</button>
-				) : (
-					<button
-						className="App-Feeds-Add"
-						onClick={this.addFeed}>
-						ADD (+)
-					</button>
-				)}
+					{this.state.loading ? (
+						<button
+							disabled
+							className="App-Feeds-Add">
+							LOADING...
+						</button>
+					) : (
+						<button
+							className="App-Feeds-Add"
+							onClick={this.addFeed}>
+							ADD (+)
+						</button>
+					)}
 
-				<ul>
-					{this.state.feeds.map((feed) => (
-						<Feed key={feed._id} id={feed._id} icon={feed.icon} title={feed.title} uri={feed.uri} unread={feed.unread} />
-					))}
-				</ul>
+					<ul>
+						{this.state.feeds.map((feed) => (
+							<Feed key={feed._id} id={feed._id} icon={feed.icon} title={feed.title} uri={feed.uri} unread={feed.unread} loaded={this.onFeedLoad} />
+						))}
+					</ul>
+				</div>
 			</div>
 		);
 	}

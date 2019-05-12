@@ -57,6 +57,8 @@ class Feed extends Component {
 			//Keep only successful new insertion
 			result = result.filter(item => item.ok === true);
 			this.setState({ loading: false, unread: _.uniq([...this.state.unread, ...result.map(item => item.id)]) });
+			//Notify parent feeds load
+			this.props.loaded(this.state);
 		} catch(e) {
 			console.error(`Unable to fetch feed: ${uri} reason: ${e}`);
 		}
