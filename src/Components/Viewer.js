@@ -20,6 +20,14 @@ class Viewer extends Component {
 		}
 	}
 
+	componentDidMount() {
+		window.addEventListener("popstate", this.handleBackButton);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("popstate", this.handleBackButton)
+	}
+
 	componentWillReceiveProps(nextProps) {
 		let viewer = nextProps.viewer;
 		if (viewer) {
@@ -34,6 +42,16 @@ class Viewer extends Component {
 				favorite: viewer.favorite || false,
 				active:   true
 			});
+
+			//Updating history hash
+			window.location.hash = viewer._rev;
+		}
+	}
+
+	handleBackButton = () => {
+		//Handle back button then close viewer
+		if (this.state.active) {
+			this.close();
 		}
 	}
 
@@ -41,6 +59,7 @@ class Viewer extends Component {
 		//Close and unreference content
 		//Activity inside the embedded viewer will be destroy ex: youtube player..
 		this.setState({ active: false, content: null });
+		window.history.replaceState(null, null, ' ');
 	}
 
 	favorite = async () => {
