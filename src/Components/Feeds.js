@@ -9,7 +9,7 @@ class Feeds extends Component {
 	constructor(props) {
 		super(props);
 
-		this.lastupdate = 0
+		this.lastupdate = (Date.now() / 1000).toFixed();
 		this.state      = {
 			rss:     '',
 			loading: false,
