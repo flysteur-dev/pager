@@ -46,7 +46,7 @@ class Feeds extends Component {
 
 			//Force update
 			//TODO: (0_') burk..
-			this.setState({ feeds: [] });
+			this.setState({ feeds: [], loaded: 0 });
 			this.setState({ feeds });
 		}
 	}
@@ -131,7 +131,7 @@ class Feeds extends Component {
 		return (
 			<div className="App-Feeds-Container">
 				<div className="App-Feeds-Loader">
-					{ this.state.feeds.length !== this.state.loaded && <div class="loader"></div> }
+					{ this.state.feeds.length !== this.state.loaded && <div className="loader"></div> }
 				</div>
 				<div className="App-Feeds hide">
 					<h1>
