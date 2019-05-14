@@ -3,6 +3,7 @@ import { DbContext } from '../Helpers/Db';
 import { PROXY_PATH, FAVICON_PROVIDER } from '../Helpers/Constants';
 import Parser from 'rss-parser';
 import Feed from './Feed';
+import { CloseIcon } from './Icon';
 
 class Feeds extends Component {
 
@@ -136,7 +137,9 @@ class Feeds extends Component {
 				<div className="App-Feeds hide">
 					<h1>
 						<img alt="pager" src={process.env.PUBLIC_URL + '/favicon.png'} />
-						<span className="App-Feeds-Toggle" onClick={this.closeFeed}>&#10005;</span>
+						<button className="App-Feeds-Toggle" onClick={this.closeFeed}>
+							<CloseIcon />
+						</button>
 					</h1>
 
 					<input

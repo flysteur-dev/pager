@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { DbContext } from '../Helpers/Db';
+import {
+	CloseIcon,
+	OpenInNewIcon,
+	ShareIcon,
+	StarFullIcon,
+	StarIcon,
+} from './Icon';
 
 class Viewer extends Component {
 
@@ -83,6 +90,7 @@ class Viewer extends Component {
 				url:   this.state.link,
 			});
 		} else {
+			//Fallback
 			//If web share is not available
 			//Copy link to clipboard
 			const el = document.createElement('textarea');
@@ -101,15 +109,17 @@ class Viewer extends Component {
 		return (
 			<div className={this.state.active ? 'App-Viewer active' : 'App-Viewer'}>
 				<div className="App-Viewer-Options">
-					<button className="App-Viewer-Options-Close" onClick={this.close}>&#10005;</button>
+					<button className="App-Viewer-Options-Close" onClick={this.close}><CloseIcon /></button>
 					<a
 						rel="noopener noreferrer"
 						target="_blank"
 						href={this.state.link}
 						onClick={this.close}>
-					<button title="Open to new tab">&#8505;</button></a>
-					<button title="Share link" onClick={this.share}>&#9741;</button>
-					<button title="Add to favorite" onClick={this.favorite}>{this.state.favorite ? '★' : '☆'}</button>
+					<button title="Open to new tab"><OpenInNewIcon /></button></a>
+					<button title="Share link" onClick={this.share}><ShareIcon /></button>
+					<button title="Add to favorite" onClick={this.favorite}>
+						{this.state.favorite ? <StarFullIcon /> : <StarIcon /> }
+					</button>
 				</div>
 
 				<div className="App-Viewer-Title">
