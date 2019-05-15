@@ -18,7 +18,8 @@ class List extends Component {
 			items:   this.props.items,
 
 			//Is option is activated
-			optionFavorite: false
+			optionFavorite: false,
+			optionDisplayLarge: false
 		}
 	}
 
@@ -97,11 +98,11 @@ class List extends Component {
 		}
 	}
 
-	//TODO: Switch display mode
-	//Compact - Full
+	//Switch display mode
+	//Default: compact
+	//Available: large
 	switchDisplayMode = () => {
-		alert("Display mode is not implemented yet.");
-		return false;
+		this.setState({optionDisplayLarge: !this.state.optionDisplayLarge});
 	}
 
 	// Open link target in a new tab or inside the embeded viewer
@@ -153,11 +154,11 @@ class List extends Component {
 					<button onClick={this.showFavoriteItems} title="Show only favorites" className={this.state.optionFavorite ? 'active' : ''}>
 						<StarFullIcon />
 					</button>
-					<button onClick={this.switchDisplayMode} title="Switch to compact view">
+					<button onClick={this.switchDisplayMode} title="Switch to compact view" className={this.state.optionDisplayLarge ? 'active' : ''}>
 						<CompactIcon />
 					</button>
 				</div>
-				<ul>
+				<ul className={this.state.optionDisplayLarge ? 'large' : 'compact'}>
 					{orderedItems.map((item) => (
 						<a key={item._id} href={item.link} onClick={(e) => this.load(e, item)} target="_blank" rel="noopener noreferrer">
 							<li className={item.unread ? 'unread' : ''}>
