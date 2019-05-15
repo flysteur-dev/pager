@@ -256,10 +256,11 @@ html, body, #root {
 			}
 
 			li {
-				display:flex;
+				display:grid;
+				grid-template-columns: 10% 10% 30% 50%;
+				grid-template-rows: 50px;
 				align-items: center;
 
-				height:50px;
 				list-style-type: none;
 				border-bottom:1px solid $bg;
 				color:$text_primary;
@@ -278,7 +279,9 @@ html, body, #root {
 					overflow: hidden;
 
 					&.i { //icon
-						width:10%;
+						grid-column: 1;
+						grid-row: 1;
+
 						text-align: center;
 
 						img {
@@ -290,23 +293,32 @@ html, body, #root {
 
 					&.ts { //time
 						display:none;
-						width:10%;
 					}
 
 					&.t { //title
-						width:90%;
+						grid-column: 2 / span 4;
+						grid-row: 1;
 					}
 
 					&.d { //description
 						display:none;
-						width: 50%;
-						margin-left:10px;
 					}
 
 					@media (min-width: 768px) {
-						&.ts { display:block; }
-						&.t  { width:30%; }
-						&.d  { display:block; }
+						&.ts {
+							grid-column: 2;
+							grid-row: 1;
+							display:block;
+						}
+						&.t {
+							grid-column: 3;
+							grid-row: 1;
+						}
+						&.d  {
+							grid-column: 4;
+							grid-row: 1;
+							display:block;
+						}
 					}
 				}
 			}
