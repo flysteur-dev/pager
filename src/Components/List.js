@@ -154,7 +154,7 @@ class List extends Component {
 					<button onClick={this.showFavoriteItems} title="Show only favorites" className={this.state.optionFavorite ? 'active' : ''}>
 						<StarFullIcon />
 					</button>
-					<button onClick={this.switchDisplayMode} title="Switch to compact view" className={this.state.optionDisplayLarge ? 'active' : ''}>
+					<button onClick={this.switchDisplayMode} title="Switch to large view" className={this.state.optionDisplayLarge ? 'active' : ''}>
 						<CompactIcon />
 					</button>
 				</div>
