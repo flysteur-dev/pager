@@ -32,7 +32,7 @@ class Viewer extends Component {
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener("popstate", this.handleBackButton)
+		window.removeEventListener("popstate", this.handleBackButton);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -49,9 +49,6 @@ class Viewer extends Component {
 				favorite: viewer.favorite || false,
 				active:   true
 			});
-
-			//Updating history hash
-			window.location.hash = viewer._rev;
 		}
 	}
 

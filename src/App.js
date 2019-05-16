@@ -44,6 +44,7 @@ class App extends Component {
 	}
 
 	openViewer = (item) => {
+		window.location.hash = "#viewer";
 		this.setState({ viewer: item });
 	}
 
