@@ -81,6 +81,7 @@ class List extends Component {
 	//Show only favorite items
 	//Can be used as read it later feature
 	showFavoriteItems = async () => {
+		if (this.state.loading === true) return;
 		this.setState({ loading: true, items: [], optionFavorite: !this.state.optionFavorite });
 
 		if (this.state.optionFavorite === false) {
