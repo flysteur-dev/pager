@@ -47,8 +47,8 @@ Main dependencies (thanks to) :<br>
 - [x] Read article in viewer
 - [x] Media sharing (require chrome 74 or fallback to clipboard)
 - [x] Adding article to favorite
-- [ ] Multi view option (compact, large)
-- [ ] Dark mode
+- [x] Multi view option (compact, large)
+- [x] Dark mode
 - [ ] Keyboard shortcuts
 - [ ] Web worker to refresh feeds in background
 - [ ] Syncing using couchDB
