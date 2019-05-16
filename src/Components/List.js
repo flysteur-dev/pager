@@ -5,6 +5,7 @@ import { DbContext } from '../Helpers/Db';
 import {
 	StarFullIcon,
 	CompactIcon,
+	LightIcon,
 } from './Icon';
 
 class List extends Component {
@@ -17,9 +18,10 @@ class List extends Component {
 			loading: true,
 			items:   this.props.items,
 
-			//Is option is activated
+			//Activate options
 			optionFavorite: false,
-			optionDisplayLarge: false
+			optionDisplayLarge: false,
+			optionDarkMode: false,
 		}
 	}
 
@@ -105,6 +107,14 @@ class List extends Component {
 		this.setState({optionDisplayLarge: !this.state.optionDisplayLarge});
 	}
 
+	//Switch dark mode
+	//Default: white
+	//Available: black
+	switchDarkMode = () => {
+		document.getElementsByClassName('App')[0].classList.toggle("dark");
+		this.setState({ optionDarkMode: !this.state.optionDarkMode });
+	}
+
 	// Open link target in a new tab or inside the embeded viewer
 	load = async (e, item) => {
 		//Dismiss default action and open it in embeded viewer
@@ -156,6 +166,9 @@ class List extends Component {
 					</button>
 					<button onClick={this.switchDisplayMode} title="Switch to large view" className={this.state.optionDisplayLarge ? 'active' : ''}>
 						<CompactIcon />
+					</button>
+					<button onClick={this.switchDarkMode} title="Switch to dark mode" className={this.state.optionDarkMode ? 'active' : ''}>
+						<LightIcon />
 					</button>
 				</div>
 				<ul className={this.state.optionDisplayLarge ? 'large' : 'compact'}>
