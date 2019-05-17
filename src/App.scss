@@ -276,10 +276,16 @@ html, body, #root {
 
 				list-style-type: none;
 				border-bottom:1px solid var(--bg);
+				background-color: var(--bg);
 				color:var(--text_primary);
 
 				&.unread {
 					font-weight: bold;
+					background-color: var(--white);
+					border-left:3px solid var(--red);
+					@media (min-width: 768px) {
+						border-left:0px;
+					}
 				}
 
 				&:hover {
@@ -347,9 +353,15 @@ html, body, #root {
 				list-style-type: none;
 				border-bottom:1px solid var(--bg);
 				color: var(--text_primary);
+				background-color: var(--bg);
 
 				&.unread {
 					font-weight: bold;
+					background-color: var(--white);
+					border-left:3px solid var(--red);
+					@media (min-width: 768px) {
+						border-left:0px;
+					}
 				}
 
 				&:hover {
