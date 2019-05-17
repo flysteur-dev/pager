@@ -499,4 +499,45 @@ html, body, #root {
 			border-left:1px solid var(--bg);
 		}
 	}
+
+	.App-Alert {
+		position: absolute;
+		bottom:0;
+
+		width:100%;
+		padding:15px;
+
+		background-color: var(--red);
+		color: white;
+		box-sizing: border-box;
+
+		.App-Alert-Title {
+			font-size:14px;
+			font-weight:bold;
+		}
+
+		.App-Alert-Content {
+			margin-top:3px;
+			margin-bottom:10px;
+		}
+
+		.App-Alert-Actions {
+			text-align: right;
+
+			button {
+				min-width:100px;
+				border-radius: 5px;
+				padding:10px;
+				background-color:var(--red);
+				border: 2px solid white;
+				color:white;
+				cursor:pointer;
+
+				&:active {
+					background-color:white;
+					color:var(--red);
+				}
+			}
+		}
+	}
 }

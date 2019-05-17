@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { DbContext } from '../Helpers/Db';
-import { PROXY_PATH, FAVICON_PROVIDER } from '../Helpers/Constants';
 import Parser from 'rss-parser';
 import Feed from './Feed';
 import { CloseIcon } from './Icon';
+import { NewUserAlert } from './Alert';
+import {
+	PROXY_PATH,
+	FAVICON_PROVIDER,
+	ONBOARDING_FEED
+} from '../Helpers/Constants';
 
 class Feeds extends Component {
 
@@ -13,7 +18,7 @@ class Feeds extends Component {
 		this.lastupdate = (Date.now() / 1000).toFixed();
 		this.state      = {
 			rss:     '',
-			loading: false,
+			loading: true,
 			loaded:  0,
 			feeds:   this.props.feeds,
 		}
@@ -29,7 +34,7 @@ class Feeds extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.feeds !== this.props.feeds) {
-			this.setState({ feeds: nextProps.feeds });
+			this.setState({ feeds: nextProps.feeds, loading: false });
 		}
 	}
 
@@ -57,14 +62,16 @@ class Feeds extends Component {
 		document.getElementsByClassName('App-Feeds')[0].classList.add("hide");
 	}
 
-	addFeed = async () => {
+	addFeed = async (link) => {
+		let rss = link;
+
 		// Test feed validity
-		if (this.state.rss === "") {
+		if (rss === "") {
 			alert("Please add rss feed link first.");
 			return;
 		}
 
-		if (!/^(http|https):\/\//.test(this.state.rss)) {
+		if (!/^(http|https):\/\//.test(rss)) {
 			alert("Missing http/https scheme.");
 			return;
 		}
@@ -73,16 +80,16 @@ class Feeds extends Component {
 		this.setState({ loading: true });
 
 		let feed = {
-			_id:   this.state.rss,
-			uri:   this.state.rss,
-			title: this.state.rss,
+			_id:   rss,
+			uri:   rss,
+			title: rss,
 			icon:  ''
 		};
 
 		//Trying to fetch xml feed
 		try {
 			let parser = new Parser();
-			let uri = `${PROXY_PATH}${this.state.rss}`;
+			let uri = `${PROXY_PATH}${rss}`;
 
 			let info = await parser.parseURL(uri);
 			if (info.title) {
@@ -91,7 +98,7 @@ class Feeds extends Component {
 			}
 
 			//Use google as favicon provider (o_O)
-			let base = info.link || this.state.rss;
+			let base = info.link || rss;
 			let icon = await fetch(`${PROXY_PATH}${FAVICON_PROVIDER}${base}`);
 			await icon.arrayBuffer().then((buffer) => {
 				//Read stream
@@ -105,7 +112,7 @@ class Feeds extends Component {
 			});
 		} catch (e) {
 			this.setState({ loading: false });
-			console.error(`Unable to add feed: ${this.state.rss} reason: ${e}`);
+			console.error(`Unable to add feed: ${rss} reason: ${e}`);
 			alert("Ooops something goes wrong..");
 			return;
 		}
@@ -119,7 +126,7 @@ class Feeds extends Component {
 			});
 		} catch(e) {
 			this.setState({ loading: false });
-			console.error(`Unable to add feed: ${this.state.rss} reason: ${e}`);
+			console.error(`Unable to add feed: ${rss} reason: ${e}`);
 		}
 	}
 
@@ -128,12 +135,23 @@ class Feeds extends Component {
 		this.setState({ loaded: this.state.loaded + 1 });
 	}
 
+	addDefaultFeed = () => {
+		// Adding onboarding feed
+		this.addFeed(ONBOARDING_FEED);
+	}
+
 	render() {
 		return (
 			<div className="App-Feeds-Container">
+				{ /* Loader */}
 				<div className="App-Feeds-Loader">
 					{ this.state.feeds.length !== this.state.loaded && <div className="loader"></div> }
 				</div>
+
+				{ /* Onboarding if empty feeds */}
+				{ (this.state.feeds.length === 0 && !this.state.loading) && <NewUserAlert triggerOK={this.addDefaultFeed} /> }
+
+				{ /* Manage feeds */}
 				<div className="App-Feeds hide">
 					<h1>
 						<img alt="pager" src={process.env.PUBLIC_URL + '/favicon.png'} />
@@ -160,7 +178,7 @@ class Feeds extends Component {
 					) : (
 						<button
 							className="App-Feeds-Add"
-							onClick={this.addFeed}>
+							onClick={() => this.addFeed(this.state.rss)}>
 							ADD (+)
 						</button>
 					)}
