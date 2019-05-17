@@ -145,7 +145,7 @@ class Feeds extends Component {
 			<div className="App-Feeds-Container">
 				{ /* Loader */}
 				<div className="App-Feeds-Loader">
-					{ this.state.feeds.length !== this.state.loaded && <div className="loader"></div> }
+					{ (this.state.loading || (this.state.feeds.length !== this.state.loaded)) && <div className="loader"></div> }
 				</div>
 
 				{ /* Onboarding if empty feeds */}
