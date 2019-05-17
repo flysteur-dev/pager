@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="https://flysteur-dev.github.io/pager/" rel="noopener" target="_blank">
+	<a href="https://pager.run" rel="noopener" target="_blank">
 		<img width="150" src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/favicon.png" alt="Pager logo">
 	</a>
 </p>
@@ -8,7 +8,7 @@
 
 ## Demo
 
-[Try it](https://pager.run) with your mobile phone or desktop browser.<br>
+[**Try it**](https://pager.run) with your mobile phone or desktop browser.<br>
 Want to keep it? Add it to your dashboard!
 
 Note: This demo is using [cors-anywhere](https://github.com/Rob--W/cors-anywhere) and may not be working or subject to usage restriction.<br>
@@ -17,17 +17,21 @@ Prefer using the docker image, who is using a built in nginx reverse proxy to ge
 ## Screenshots
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/4.png" width="250px" alt="splashscreen">
-	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/2.png" width="250px" alt="news">
-	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/3.png" width="250px" alt="feed list">
-	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/1.png" width="900px" alt="desktop">
+	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/1.png" width="250px" alt="feed list">
+	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/2.png" width="250px" alt="embedded viewer">
+	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/3.png" width="250px" alt="feeds">
+	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/4.png" width="250px" alt="dark feed list">
+	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/5.png" width="250px" alt="dark embedded viewer">
+	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/6.png" width="250px" alt="sharing">
+	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/7.png" width="760px" alt="desktop">
+	<img src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/8.png" width="760px" alt="dark desktop">
 </p>
 
 ## Why ?
 
 "Read and Run Everywhere.."<br><br>
 
-Pager wants to be a very very minimalist rss reader.<br>
+Pager wants to be a very very minimalist multi-platform rss reader.<br>
 It will ever only use web technologies and will stay as much as possible serverless** with business logic in the client side.<br>
 Optionnally (later) it will offer syncing option to share feeds between instances (desktop, mobile, etc..)<br><br>
 
@@ -92,8 +96,8 @@ open http://localhost:3000
 ```
 
 ## Changelog
-[0.1.0] - 2019-05-01
-- Initial release
+
+Check out the [release page](https://github.com/flysteur-dev/pager/releases)
 
 ## Contributing
 
