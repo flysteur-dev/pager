@@ -1,0 +1,12 @@
+{
+	"name": "Pager",
+	"description": "Minimalist serverless RSS reader",
+	"repository": "https://github.com/flysteur-dev/pager",
+	"logo": "https://raw.githubusercontent.com/flysteur-dev/pager/master/public/favicon.png",
+	"keywords": [
+		"pager",
+		"rss-reader",
+		"react",
+		"pwa"
+	]
+}
