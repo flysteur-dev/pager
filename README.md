@@ -58,7 +58,10 @@ Main dependencies (thanks to) :<br>
 - [ ] Syncing using couchDB
 - [ ] Desktop app using electron
 
-## Try it
+## Self hosted
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/flysteur-dev/pager)
+<br>
 
 ```sh
 // WITH DOCKER (< 25 Mo)
