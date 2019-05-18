@@ -61,16 +61,14 @@ Main dependencies (thanks to) :<br>
 ## Try it
 
 ```sh
-// WITH DOCKER
+// WITH DOCKER (< 25 Mo)
 //
 git clone git@github.com:flysteur-dev/pager.git
 
 // Install
 cd pager
-npm install
 
 // Build the docker container
-npm run build
 docker build --tag=pager .
 
 // Run
