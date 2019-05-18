@@ -75,7 +75,7 @@ cd pager
 docker build --tag=pager .
 
 // Run
-docker run -p 3000:80 pager
+docker run --env PORT=80 -p 3000:80 pager
 open http://localhost:3000
 ```
 
