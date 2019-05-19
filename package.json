@@ -19,10 +19,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "eslint --ext .js src/",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "env": { "es6": true },
+    "parser": "babel-eslint",
+    "extends": "airbnb"
   },
   "browserslist": [
     ">0.2%",
@@ -31,6 +34,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0",
     "gh-pages": "^2.0.1"
   }
 }
