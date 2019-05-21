@@ -23,7 +23,9 @@
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
-    "env": { "es6": true },
+    "env": {
+      "es6": true
+    },
     "parser": "babel-eslint",
     "extends": "airbnb"
   },
@@ -34,6 +36,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "cypress": "^3.3.0",
     "eslint-config-airbnb": "^17.1.0",
     "gh-pages": "^2.0.1"
   }

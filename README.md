@@ -6,6 +6,8 @@
 
 <h1 align="center">Pager</h1>
 
+[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
+
 ## Demo
 
 [**Try it**](https://pager.run) with your mobile phone or desktop browser.<br>
