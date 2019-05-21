@@ -98,18 +98,20 @@ class Feeds extends Component {
 			}
 
 			//Use google as favicon provider (o_O)
-			let base = info.link || rss;
-			let icon = await fetch(`${PROXY_PATH}${FAVICON_PROVIDER}${base}`);
-			await icon.arrayBuffer().then((buffer) => {
-				//Read stream
-				var binary     = '';
-				var bytes      = [].slice.call(new Uint8Array(buffer));
-					bytes.forEach((b) => binary += String.fromCharCode(b));
-				var imageStr   = window.btoa(binary);
+			if (window.fetch) {
+				let base = info.link || rss;
+				let icon = await fetch(`${PROXY_PATH}${FAVICON_PROVIDER}${base}`);
+				await icon.arrayBuffer().then((buffer) => {
+					//Read stream
+					var binary     = '';
+					var bytes      = [].slice.call(new Uint8Array(buffer));
+						bytes.forEach((b) => binary += String.fromCharCode(b));
+					var imageStr   = window.btoa(binary);
 
-				//Save icon as base64
-				feed.icon = `data:image/png;base64,${imageStr}`;
-			});
+					//Save icon as base64
+					feed.icon = `data:image/png;base64,${imageStr}`;
+				});
+			}
 		} catch (e) {
 			this.setState({ loading: false });
 			console.error(`Unable to add feed: ${rss} reason: ${e}`);
