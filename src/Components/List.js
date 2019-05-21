@@ -153,7 +153,7 @@ class List extends Component {
 
 
 		//Order by date DESC
-		let orderedItems = _.sortBy(this.state.items, [(o) => { return -o.date }]);
+		let orderedItems = _.sortBy(this.state.items, (item) => (-item.date), (item) => (item.unread));
 
 		//Unread items
 		let unreadItems  = this.state.items.filter(item => item.unread === true);
