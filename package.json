@@ -20,7 +20,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js src/",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "electron": "electron electron/App.js"
   },
   "eslintConfig": {
     "env": {
@@ -37,6 +38,7 @@
   ],
   "devDependencies": {
     "cypress": "^3.3.0",
+    "electron": "^5.0.2",
     "eslint-config-airbnb": "^17.1.0",
     "gh-pages": "^2.0.1"
   }
