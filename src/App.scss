@@ -193,6 +193,13 @@ html, body, #root {
 		overflow: auto;
 		background-color: var(--white);
 
+		@media (min-width: 768px) {
+			// desktop only horizontal resizing
+			min-width: 400px;
+			resize: horizontal;
+			flex-grow: inherit;
+		}
+
 		.App-List-Options {
 			display: flex;
 			align-items: center;
@@ -499,6 +506,13 @@ html, body, #root {
 		@media (min-width: 768px) {
 			position:inherit;
 			border-left:1px solid var(--bg);
+
+			&.active {
+				//hack..
+				//force window size to control resize gap
+				width:1px;
+				min-width:400px;
+			}
 		}
 	}
 
