@@ -58,7 +58,7 @@ Main dependencies (thanks to) :<br>
 - [ ] Keyboard shortcuts
 - [ ] Web worker to refresh feeds in background
 - [ ] Syncing using couchDB
-- [ ] Desktop app using electron
+- [ ] Desktop app using electron (WIP: electron branch)
 
 ## Self hosted
 
