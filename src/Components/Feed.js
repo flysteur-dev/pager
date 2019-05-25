@@ -13,11 +13,12 @@ class Feed extends Component {
 		this.listener = null;
 		this.state    = {
 			loading: true,
-			id:      this.props.id,
-			icon:    this.props.icon,
-			title:   this.props.title,
-			uri:     this.props.uri,
-			unread:  this.props.unread || []
+			id:      this.props.feed.id,
+			icon:    this.props.feed.icon,
+			title:   this.props.feed.title,
+			uri:     this.props.feed.uri,
+			created: this.props.feed.created || 0,
+			unread:  this.props.feed.unread  || []
 		}
 	}
 
@@ -37,18 +38,21 @@ class Feed extends Component {
 				let date = item.isoDate || (item.pubDate) ? item.pubDate.replace(/CET|CEST/gi, '') : moment();
 				let ts   = moment(date).unix();
 
-				newItems.push({
-					_id:      item.guid || item.id,
-					feedId:   this.state.id,
-					icon:     this.state.icon,
-					title:    item.title,
-					desc:     item.contentSnippet,
-					content:  item["content:encoded"] || item.content,
-					date:     ts,
-					link:     item.link,
-					unread:   true,
-					favorite: false,
-				});
+				//Add only new items since feed was imported
+				if (ts >= this.state.created) {
+					newItems.push({
+						_id:      item.guid || item.id,
+						feedId:   this.state.id,
+						icon:     this.state.icon,
+						title:    item.title,
+						desc:     item.contentSnippet,
+						content:  item["content:encoded"] || item.content,
+						date:     ts,
+						link:     item.link,
+						unread:   true,
+						favorite: false,
+					});
+				}
 			});
 
 			//Try to add new document
@@ -86,7 +90,7 @@ class Feed extends Component {
 
 	filter = () => {
 		//TODO: Filter only this feed
-		alert("Not implemented.");
+		console.warn("Not implemented.");
 	}
 
 	render() {
@@ -94,7 +98,7 @@ class Feed extends Component {
 			<li onClick={this.filter} title={this.state.title}>
 				<div className="n">{(this.state.loading) ? '...' : this.state.unread.length}</div>
 				<div className="i"><img src={this.state.icon} alt="-" /></div>
-				<div className="t">{this.state.title.substring(0, 30)}</div>
+				<div className="t">{(this.state.title) ? this.state.title.substring(0, 30) : ''}</div>
 			</li>
 		)
 	}

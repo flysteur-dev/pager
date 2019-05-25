@@ -16,10 +16,10 @@ class Feeds extends Component {
 		super(props);
 
 		this.lastupdate = (Date.now() / 1000).toFixed();
+		this.loaded     = 0;
 		this.state      = {
 			rss:     '',
 			loading: true,
-			loaded:  0,
 			feeds:   this.props.feeds,
 		}
 	}
@@ -42,6 +42,32 @@ class Feeds extends Component {
 		this.setState({ rss: event.target.value.toLowerCase().trim()});
 	}
 
+	handleOpmlFileChange = (event) => {
+		if (event.target.files.length === 0) return;
+
+		let fileReader = new FileReader();
+		fileReader.onloadend = () => {
+			if(fileReader.result === "") return;
+			if(fileReader.result.startsWith('<?xml') === false) {
+				alert("Please upload a valid opml file.");
+				return;
+			}
+
+			//1- Extract all xmlUrl
+			let urls = fileReader.result.match(/xmlUrl="(.*?)"/g);
+
+			//2- Add feed
+			urls.forEach((feed, i) => {
+				feed = feed.replace('xmlUrl="', '').slice(0, -1);
+				setTimeout(() => {
+					this.addFeed(feed, true);
+				}, i * 100);
+			});
+		}
+
+		fileReader.readAsText(event.target.files[0]);
+	}
+
 	handleAppForeground = (event) => {
 		//Trigger automatic update on app foreground
 		//Update only if lastupdate < 1 minute
@@ -52,7 +78,8 @@ class Feeds extends Component {
 
 			//Force update
 			//TODO: (0_') burk..
-			this.setState({ feeds: [], loaded: 0 });
+			this.loaded = 0;
+			this.setState({ feeds: [] });
 			this.setState({ feeds });
 		}
 	}
@@ -62,7 +89,7 @@ class Feeds extends Component {
 		document.getElementsByClassName('App-Feeds')[0].classList.add("hide");
 	}
 
-	addFeed = async (link) => {
+	addFeed = async (link, fromOPML = false) => {
 		let rss = link;
 
 		// Test feed validity
@@ -80,10 +107,11 @@ class Feeds extends Component {
 		this.setState({ loading: true });
 
 		let feed = {
-			_id:   rss,
-			uri:   rss,
-			title: rss,
-			icon:  ''
+			_id:     rss,
+			uri:     rss,
+			title:   rss,
+			icon:    '',
+			created: (fromOPML) ? parseInt(Date.now() / 100) : 0
 		};
 
 		//Trying to fetch xml feed
@@ -115,7 +143,6 @@ class Feeds extends Component {
 		} catch (e) {
 			this.setState({ loading: false });
 			console.error(`Unable to add feed: ${rss} reason: ${e}`);
-			alert("Ooops something goes wrong..");
 			return;
 		}
 
@@ -133,8 +160,11 @@ class Feeds extends Component {
 	}
 
 	onFeedLoad = () => {
-		// Listening feed load
-		this.setState({ loaded: this.state.loaded + 1 });
+		// Counting feed load
+		this.loaded = this.loaded + 1;
+		if (this.loaded === this.state.feeds.length) {
+			this.setState({ loading: false });
+		}
 	}
 
 	addDefaultFeed = () => {
@@ -147,7 +177,7 @@ class Feeds extends Component {
 			<div className="App-Feeds-Container">
 				{ /* Loader */}
 				<div className="App-Feeds-Loader">
-					{ (this.state.loading || (this.state.feeds.length !== this.state.loaded)) && <div className="loader"></div> }
+					{ (this.state.loading) && <div className="loader"></div> }
 				</div>
 
 				{ /* Onboarding if empty feeds */}
@@ -162,13 +192,27 @@ class Feeds extends Component {
 						</button>
 					</h1>
 
+					{ /* Http link */ }
 					<input
 						className="App-Feeds-Input"
 						type="text"
 						ref={c => (this._input = c)}
 						value={this.state.rss}
 						onChange={this.handleChange}
-						placeholder="Add rss feed link here.."
+						placeholder="| Add rss feed link here.."
+					/>
+
+					{ /* OPML */ }
+					<label
+						className="App-Feeds-Input-OPML"
+						htmlFor="opml-file-trigger">
+						OPML
+					</label>
+					<input
+						id="opml-file-trigger"
+						type="file"
+						onChange={this.handleOpmlFileChange}
+						style={{display:'none'}}
 					/>
 
 					{this.state.loading ? (
@@ -187,7 +231,11 @@ class Feeds extends Component {
 
 					<ul>
 						{this.state.feeds.map((feed) => (
-							<Feed key={feed._id} id={feed._id} icon={feed.icon} title={feed.title} uri={feed.uri} unread={feed.unread} loaded={this.onFeedLoad} />
+							<Feed
+								key={feed._id}
+								feed={feed}
+								loaded={this.onFeedLoad}
+							/>
 						))}
 					</ul>
 				</div>
