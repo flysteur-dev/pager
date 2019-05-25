@@ -64,6 +64,9 @@ class Viewer extends Component {
 		//Activity inside the embedded viewer will be destroy ex: youtube player..
 		this.setState({ active: false, content: null });
 		window.history.replaceState(null, null, ' ');
+
+		//Desktop: Remove fixed width (css: resize)
+		document.getElementsByClassName('App-List')[0].style = null;
 	}
 
 	favorite = async () => {
