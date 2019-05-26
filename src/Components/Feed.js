@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import moment from 'moment';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DbContext } from '../Helpers/Db';
 import { PROXY_PATH } from '../Helpers/Constants';
 import Parser from 'rss-parser';
@@ -13,7 +14,7 @@ class Feed extends Component {
 		this.listener = null;
 		this.state    = {
 			loading: true,
-			id:      this.props.feed.id,
+			id:      this.props.feed._id,
 			icon:    this.props.feed.icon,
 			title:   this.props.feed.title,
 			uri:     this.props.feed.uri,
@@ -103,6 +104,16 @@ class Feed extends Component {
 		)
 	}
 }
+
+Feed.propTypes = {
+	feed: PropTypes.object.isRequired,
+	feed: PropTypes.shape({
+		_id:   PropTypes.string.isRequired,
+		icon:  PropTypes.string.isRequired,
+		title: PropTypes.string.isRequired,
+		uri:   PropTypes.string.isRequired
+	}),
+};
 
 Feed.contextType = DbContext;
 export default Feed;
