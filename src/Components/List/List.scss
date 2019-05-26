@@ -1,0 +1,244 @@
+.App-List {
+	flex-grow: 2;
+	width:100%;
+	overflow: auto;
+	background-color: var(--white);
+
+	@media (min-width: 768px) {
+		// desktop only horizontal resizing
+		min-width: 400px;
+		resize: horizontal;
+		flex-grow: inherit;
+	}
+
+	.App-List-Options {
+		display: flex;
+		align-items: center;
+		position:fixed;
+		min-width:100%;
+		height:50px;
+		background-color: var(--bg);
+
+		button {
+			height: 50px;
+			min-width:60px;
+			margin:0px;
+			border:0;
+			background-color: var(--white);
+			color: var(--red);
+			font-weight: bold;
+			cursor:pointer;
+			font-size: 15px;
+			border-right: 1px solid var(--bg);
+
+			svg { fill: var(--red); }
+			&.active {
+				background-color: var(--red);
+				svg { fill: var(--white); }
+			}
+
+			&.App-List-Options-Open-Feeds {
+				width:100px;
+				background-color: var(--text_secondary);
+				color: var(--white);
+				border:0;
+
+				//Only for mobile
+				@media (min-width: 768px) { display:none; }
+			}
+		}
+	}
+
+	.App-List-Empty {
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.App-List-Mark-As-Read-Button {
+		display:flex;
+		justify-content: center;
+
+		margin:auto;
+		width:45%;
+		cursor:pointer;
+
+		p {
+			height: 15px;
+			line-height: 15px;
+			padding: 8px;
+			background-color: var(--red);
+			border-radius: 10px;
+			text-align: center;
+			color: #ffffff;
+			font-weight: bold;
+		}
+	}
+
+	ul {
+		margin:0;
+		padding:0;
+		margin-top:50px;
+
+		a {
+			text-decoration: none;
+			outline: 0;
+			user-select: none;
+		}
+
+		//Default: compact view
+		&.compact li {
+			display:grid;
+			grid-template-columns: 10% 10% 30% 50%;
+			grid-template-rows: 50px;
+			align-items: center;
+
+			list-style-type: none;
+			border-bottom:1px solid var(--bg);
+			background-color: var(--bg);
+			color:var(--text_primary);
+
+			&.unread {
+				font-weight: bold;
+				background-color: var(--white);
+				border-left:3px solid var(--red);
+				@media (min-width: 768px) {
+					border-left:0px;
+				}
+			}
+
+			&:hover {
+				cursor:pointer;
+				background-color: var(--bg);
+			}
+
+			div {
+				max-height: 40px;
+				overflow: hidden;
+
+				&.i { //icon
+					grid-column: 1;
+					grid-row: 1;
+
+					text-align: center;
+
+					img {
+						height:16px;
+						width:16px;
+						margin-top:2px;
+					}
+				}
+
+				&.ts { //time
+					display:none;
+				}
+
+				&.t { //title
+					grid-column: 2 / span 4;
+					grid-row: 1;
+				}
+
+				&.d { //description
+					display:none;
+				}
+
+				@media (min-width: 768px) {
+					&.ts {
+						grid-column: 2;
+						grid-row: 1;
+						display:block;
+					}
+					&.t {
+						grid-column: 3;
+						grid-row: 1;
+					}
+					&.d  {
+						grid-column: 4;
+						grid-row: 1;
+						display:block;
+					}
+				}
+			}
+		}
+
+		//large view
+		&.large li {
+			display:grid;
+			grid-template-columns: 10% 90%;
+			grid-template-rows: 40px 40px;
+			align-items: center;
+
+			min-height: 90px;
+			list-style-type: none;
+			border-bottom:1px solid var(--bg);
+			color: var(--text_primary);
+			background-color: var(--bg);
+
+			&.unread {
+				font-weight: bold;
+				background-color: var(--white);
+				border-left:3px solid var(--red);
+				@media (min-width: 768px) {
+					border-left:0px;
+				}
+			}
+
+			&:hover {
+				cursor:pointer;
+				background-color: var(--bg);
+			}
+
+			div {
+				&.i { //icon
+					grid-column: 1;
+					grid-row: 1;
+
+					text-align: center;
+
+					img {
+						height:16px;
+						width:16px;
+						margin-top:2px;
+					}
+				}
+
+				&.ts { //time
+					display:none;;
+				}
+
+				&.t { //title
+					grid-column: 2;
+					grid-row: 1;
+				}
+
+				&.d { //description
+					grid-column: 1 / span 2;
+					grid-row: 2;
+
+					padding:5px;
+					font-size:11px;
+				}
+
+				@media (min-width: 768px) {
+					&.ts {
+						grid-column: 1;
+						grid-row: 2;
+						display:block;
+						text-align: center;
+						font-size:11px;
+					}
+					&.t {
+						grid-column: 2;
+						grid-row: 1;
+					}
+					&.d  {
+						grid-column: 2;
+						grid-row: 2;
+						display:block;
+						padding:0px;
+					}
+				}
+			}
+		}
+	}
+}

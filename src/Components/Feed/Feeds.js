@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { DbContext } from '../Helpers/Db';
+import { DbContext } from '../../Helpers/Db';
 import Parser from 'rss-parser';
 import Feed from './Feed';
-import { CloseIcon } from './Icon';
-import { NewUserAlert } from './Alert';
+import { CloseIcon } from '../Icon/Icon';
+import { NewUserAlert } from '../Alert/Alert';
 import {
 	PROXY_PATH,
 	FAVICON_PROVIDER,
 	ONBOARDING_FEED
-} from '../Helpers/Constants';
+} from '../../Helpers/Constants';
+import './Feeds.scss';
 
 class Feeds extends Component {
 

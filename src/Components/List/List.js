@@ -1,12 +1,13 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import moment from 'moment';
-import { DbContext } from '../Helpers/Db';
+import { DbContext } from '../../Helpers/Db';
 import {
 	StarFullIcon,
 	CompactIcon,
 	LightIcon,
-} from './Icon';
+} from '../Icon/Icon';
+import './List.scss';
 
 class List extends Component {
 

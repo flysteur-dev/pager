@@ -3,9 +3,9 @@ import { DbContext } from './Helpers/Db';
 import './App.scss';
 
 //Components
-import Feeds  from './Components/Feeds';
-import List   from './Components/List';
-import Viewer from './Components/Viewer';
+import Feeds  from './Components/Feed/Feeds';
+import List   from './Components/List/List';
+import Viewer from './Components/Viewer/Viewer';
 
 class App extends Component {
 

@@ -1,0 +1,174 @@
+.App-Feeds-Container {
+
+	.App-Feeds {
+		position:absolute;
+		display:flex;
+		flex-grow: 1;
+		flex-direction: column;
+		overflow: auto;
+		height:100%;
+		width:100%;
+		background-color: var(--bg);
+		z-index:998;
+
+		&.hide {
+			display: none;
+			@media (min-width: 768px) { display:block; }
+		}
+
+		@media (min-width: 768px) {
+			position: initial;
+			min-width:250px;
+			max-width:250px;
+		}
+
+		.App-Feeds-Toggle {
+			width:100px;
+			height:50px;
+			position: absolute;
+			left:0;
+			border:0;
+			background-color: var(--text_secondary);
+
+			svg { fill: var(--white) }
+			@media (min-width: 768px) { display:none; }
+		}
+
+		h1 {
+			height:50px;
+			line-height:50px;
+			margin:0;
+			text-align:center;
+			color: var(--text_primary);
+
+			img {
+				height:32px;
+				width:32px;
+				margin-top:10px;
+			}
+		}
+
+		.App-Feeds-Add {
+			width:100%;
+			height:40px;
+			font-weight: bold;
+			border:0;
+			background-color: var(--red);
+			color: #ffffff;
+			cursor:pointer;
+		}
+
+		.App-Feeds-Input {
+			width:100%;
+			height:40px;
+			text-indent:60px;
+			background-color: var(--white);
+			box-sizing: border-box;
+			border:0;
+			outline:0;
+
+			&::placeholder {
+				color:var(--text_secondary);
+			}
+		}
+
+		.App-Feeds-Input-OPML {
+			position: relative;
+			left:10px;
+			top:-25px;
+
+			cursor:pointer;
+			width:38px;
+			padding:3px;
+			font-size:11px;
+			font-weight:bold;
+			text-align: center;
+			border-radius:5px;
+			background-color: var(--red);
+			color: white;
+		}
+
+		ul {
+			margin:0;
+			padding:0;
+			overflow: auto;
+
+			li {
+				display:flex;
+				align-items: center;
+				flex-wrap: nowrap;
+
+				height:40px;
+				padding:10px;
+				list-style-type: none;
+				box-sizing: border-box;
+				overflow: hidden;
+
+				&:hover {
+					cursor:pointer;
+					background-color: var(--white);
+				}
+
+				div {
+					height:100%;
+					line-height: 20px;
+
+					&.n { // unread
+						width:10%;
+						background-color: var(--red);
+						border-radius: 10px;
+						text-align: center;
+						color: #ffffff;
+						font-weight: bold;
+						font-size:11px;
+					}
+					&.i { // icon
+						width:10%;
+						text-align: center;
+
+						img {
+							width:16px;
+							height:16px;
+							margin-top:2px;
+						}
+					}
+					&.t { // feed title
+						width:80%;
+						flex-grow: 4;
+					}
+				}
+			}
+		}
+	}
+
+	.App-Feeds-Loader {
+		.loader {
+			position: absolute;
+			z-index:999;
+			height: 4px;
+			width: 100%;
+			overflow: hidden;
+			background-color: var(--bg);
+
+			&:before {
+				position: absolute;
+				display: block;
+				left: -200px;
+				width: 200px;
+				height: 4px;
+				background-color: var(--red);
+				animation: loading 1.5s linear infinite;
+				content: "";
+			}
+
+			@keyframes loading {
+				from { left: -200px; width: 30%; }
+				50%  { width: 30%; }
+				70%  { width: 70%; }
+				80%  { left: 50%;  }
+				95%  { left: 120%; }
+				to   { left: 100%; }
+			}
+		}
+	}
+}

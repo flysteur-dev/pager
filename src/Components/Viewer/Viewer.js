@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { DbContext } from '../Helpers/Db';
+import { DbContext } from '../../Helpers/Db';
 import {
 	CloseIcon,
 	OpenInNewIcon,
 	ShareIcon,
 	StarFullIcon,
 	StarIcon,
-} from './Icon';
+} from '../Icon/Icon';
+import './Viewer.scss';
 
 class Viewer extends Component {
 

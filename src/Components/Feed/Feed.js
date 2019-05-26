@@ -2,8 +2,8 @@ import _ from 'lodash';
 import moment from 'moment';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { DbContext } from '../Helpers/Db';
-import { PROXY_PATH } from '../Helpers/Constants';
+import { DbContext } from '../../Helpers/Db';
+import { PROXY_PATH } from '../../Helpers/Constants';
 import Parser from 'rss-parser';
 
 class Feed extends Component {
