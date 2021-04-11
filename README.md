@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="https://pager.run" rel="noopener" target="_blank">
+	<a href="https://flysteur-dev.github.io/pager/" rel="noopener" target="_blank">
 		<img width="150" src="https://raw.githubusercontent.com/flysteur-dev/pager/master/public/favicon.png" alt="Pager logo">
 	</a>
 </p>
@@ -10,10 +10,10 @@
 
 ## Demo
 
-[**Try it**](https://pager.run) with your mobile phone or desktop browser.<br>
+[**Try it**](https://flysteur-dev.github.io/pager/) with your mobile phone or desktop browser.<br>
 Want to keep it? Add it to your dashboard!
 
-Note: This demo is using [cors-anywhere](https://github.com/Rob--W/cors-anywhere) and may not be working or subject to usage restriction.<br>
+Important: This demo is using [cors-anywhere](https://github.com/Rob--W/cors-anywhere) and may not be working or subject to usage restriction. (Not working anymore please refer to [#301](https://github.com/Rob--W/cors-anywhere/issues/301))<br>
 Prefer using the docker image, who is using a built in nginx reverse proxy to get around of CORS restriction, see instruction below.
 
 ## Screenshots
