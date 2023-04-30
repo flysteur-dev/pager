@@ -11,7 +11,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
-    "rss-parser": "^3.7.0",
+    "rss-parser": "^3.13.0",
     "node-sass": "^4.11.0"
   },
   "scripts": {
